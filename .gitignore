@@ -130,3 +130,6 @@ dmypy.json
 
 #IDE folders
 .idea
+
+#Data folder
+web-ui/src/data/**/*.csv
