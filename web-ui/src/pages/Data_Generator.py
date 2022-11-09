@@ -58,41 +58,46 @@ st.write(st.session_state.prefix)
 
 tab1, tab2, tab3 = st.tabs(["Real Data", "Generate Data", "Evaluations"])
 
+
+def file_exist(file_path) -> bool:
+    return os.path.exists(file_path)
+
 with tab1:
     if option3 == 'singleCSVTable':
         dir = os.path.join(setupBaseDir, "../data/single_table/real/")
         uploaded_files = st.file_uploader("Choose a file")
-        dataframe = pd.read_csv(uploaded_files)
+        if uploaded_files is not None:
+            dataframe = pd.read_csv(uploaded_files)
 
-        #check if file exists
-        real_path = dir+st.session_state.prefix+'.csv'
-        isExist = os.path.exists(real_path)
-        if isExist == True:
-            os.remove(real_path)
+            #check if file exists
+            real_path = dir+st.session_state.prefix+'.csv'
+            isExist = os.path.exists(real_path)
+            if isExist == True:
+                os.remove(real_path)
 
-        #save real file
-        dataframe.to_csv(dir+st.session_state.prefix+'.csv', sep=',' ) 
-        st.write(dir+st.session_state.prefix+'.csv')
-        st.write(dataframe)
-        st.write('Generate synthetic data based on the uploaded dataset in the generate data tab')
+            #save real file
+            dataframe.to_csv(dir+st.session_state.prefix+'.csv', sep=',' )
+            st.write(dir+st.session_state.prefix+'.csv')
+            st.write(dataframe)
+            st.write('Generate synthetic data based on the uploaded dataset in the generate data tab')
     else:
         counter = 1
         uploaded_files = st.file_uploader("Choose CSV files", accept_multiple_files=True, key =counter)
-        
-        dataframe_collection = {}
+        if uploaded_files is not None:
+            dataframe_collection = {}
 
-        for uploaded_file in uploaded_files:
-            dir = os.path.join(setupBaseDir, "../data/multi_table/real/")
-            dataframe = pd.read_csv(uploaded_file)
-            dataframe_collection[counter] = dataframe
-            st.write(dir+st.session_state.prefix+'_'+str(counter)+'.csv')
-            dataframe.to_csv(dir+st.session_state.prefix+'_'+str(counter)+'.csv', sep=',' )
-            dataframe = dataframe.append(dataframe_collection, ignore_index=True)
-            # complete_name = dir+prefix+'_'+str(counter)+'.csv'
-            counter +=1
-        st.write(dataframe_collection)
-        
-        st.write('Generate synthetic data based on the uploaded dataset on the generate data tab')
+            for uploaded_file in uploaded_files:
+                dir = os.path.join(setupBaseDir, "../data/multi_table/real/")
+                dataframe = pd.read_csv(uploaded_file)
+                dataframe_collection[counter] = dataframe
+                st.write(dir+st.session_state.prefix+'_'+str(counter)+'.csv')
+                dataframe.to_csv(dir+st.session_state.prefix+'_'+str(counter)+'.csv', sep=',' )
+                dataframe = dataframe.append(dataframe_collection, ignore_index=True)
+                # complete_name = dir+prefix+'_'+str(counter)+'.csv'
+                counter +=1
+            st.write(dataframe_collection)
+
+            st.write('Generate synthetic data based on the uploaded dataset on the generate data tab')
             # bytes_data = uploaded_file.read()
             # st.write("filename:",complete_name)
             # st.write(bytes_data)
@@ -140,178 +145,180 @@ with tab1:
 
 with tab2:
     if option3 == 'singleCSVTable':
-        #Handle different models
-        sample_size = st.number_input('Rows', min_value=1, max_value=100000, value=5, step=1)
 
-        #reading current file(s)
-        df = pd.read_csv(real_dir+st.session_state.prefix+'.csv')
+        file = real_dir+st.session_state.prefix+'.csv'
+        if file_exist(file):
+            # Handle different models
+            sample_size = st.number_input('Rows', min_value=1, max_value=100000, value=5, step=1)
+            #reading current file(s)
+            df = pd.read_csv(file)
 
-        #check if files already exist
-        model_TVAE_path = model_TVAE_dir+st.session_state.prefix+'.pkl'
-        model_CopulaGAN_path = model_CopulaGAN_dir+st.session_state.prefix+'.pkl'
-        model_CTGAN_path = model_CTGAN_dir+st.session_state.prefix+'.pkl'
-        model_GaussianCopula_path = model_GaussianCopula_dir+st.session_state.prefix+'.pkl'
-        model_TabularPreset_path = model_TabularPreset_dir+st.session_state.prefix+'.pkl'
+            #check if files already exist
+            model_TVAE_path = model_TVAE_dir+st.session_state.prefix+'.pkl'
+            model_CopulaGAN_path = model_CopulaGAN_dir+st.session_state.prefix+'.pkl'
+            model_CTGAN_path = model_CTGAN_dir+st.session_state.prefix+'.pkl'
+            model_GaussianCopula_path = model_GaussianCopula_dir+st.session_state.prefix+'.pkl'
+            model_TabularPreset_path = model_TabularPreset_dir+st.session_state.prefix+'.pkl'
 
-        model_paths = ['model_TVAE_path', 'model_CopulaGAN_path', 'model_CTGAN_path','model_GaussianCopula_path', 'model_TabularPreset_path']
+            model_paths = ['model_TVAE_path', 'model_CopulaGAN_path', 'model_CTGAN_path','model_GaussianCopula_path', 'model_TabularPreset_path']
 
-        for model_path in model_paths:
-            isExist = os.path.exists(model_path)
-            if isExist == True:
-                os.remove(model_path)
-
-
-        #specify fit and save model
-        #1. Tabular Preset
-        TabularPreset_model = TabularPreset(name='FAST_ML', metadata=df.info())
-        TabularPreset_model.fit(df)
-        TabularPreset_model.save(model_TabularPreset_path)
-
-        #2. CopulaGAN
-        CopulaGAN_model = CopulaGAN()
-        CopulaGAN_model.fit(df)
-        CopulaGAN_model.save(model_CopulaGAN_path)
-
-        #3. CTGAN
-        CTGAN_model = CTGAN()
-        data=df
-        CTGAN_model.fit(data)
-        CTGAN_model.save(model_CTGAN_path)
-
-        #4. GaussianCopula
-        GaussianCopula_model = GaussianCopula()
-        GaussianCopula_model.fit(df)
-        GaussianCopula_model.save(model_GaussianCopula_path)
-
-        #5. TVAE
-        TVAE_model = GaussianCopula()
-        TVAE_model.fit(df)
-        TVAE_model.save(model_TVAE_path)
-
-        #Generate Datasets
-        if st.button('Generate'):
-            with st.spinner('Wait for it...'):
-                time.sleep(5) 
-                #TVAE_synthetic_data = model.sample(num_rows=sample_size)
-
-                model_paths = [synthetic_TVAE_path, synthetic_CopulaGAN_path, synthetic_CTGAN_path,synthetic_TabularPreset_path,synthetic_GaussianCopula_path ]
-                for model_path in model_paths:
-                    isExist = os.path.exists(model_path )
-                    if isExist == True:
-                        os.remove(model_path)
-                
-                #save synthetic data
-                #1. Tabular Preset
-                TabularPreset_model.sample(num_rows=sample_size, output_file_path=synthetic_TabularPreset_path)
-                #2. TVAE
-                TVAE_model.sample(num_rows=sample_size, output_file_path=synthetic_TVAE_path)
-                #3. CTGAN 
-                CTGAN_model.sample(num_rows=sample_size, output_file_path=synthetic_CTGAN_path)
-                #4. GaussianCopula_model
-                GaussianCopula_model.sample(num_rows=sample_size, output_file_path=synthetic_GaussianCopula_path)
-                #5. CopulaGAN
-                CopulaGAN_model.sample(num_rows=sample_size, output_file_path=synthetic_CopulaGAN_path)
-                #TabularPresetReport = QualityReport()
-
-                #displaying previews
-                #1. TabularPreset
-                st.write('Tabular Preset Sample:')
-                st.write(TabularPreset_model.sample(num_rows=sample_size))
-                st.success('Done!')
-
-                #Download Button
-                df_TabularPreset = pd.read_csv(synthetic_TabularPreset_path)
-                def convert_df(df_TabularPreset):
-                    # IMPORTANT: Cache the conversion to prevent computation on every rerun
-                    return dataframe.to_csv().encode('utf-8')
-
-                csv = convert_df(df_TabularPreset)
-                st.download_button(
-                label="Download data as CSV",
-                data=csv,
-                file_name=synthetic_TabularPreset_path+st.session_state.prefix+'.csv',
-                mime='text/csv')
-
-                #2. CopulaGAN
-                st.write('CopulaGAN Sample:')
-                st.write(CopulaGAN_model.sample(num_rows=sample_size))
-                st.success('Done!')
-                
-                df_CopulaGAN = pd.read_csv(synthetic_CopulaGAN_path)
-                def convert_df(df_CopulaGAN):
-                    # IMPORTANT: Cache the conversion to prevent computation on every rerun
-                    return df_CopulaGAN.to_csv().encode('utf-8')
-
-                csv = convert_df(df_CopulaGAN)
-                st.download_button(
-                label="Download data as CSV",
-                data=csv,
-                file_name=synthetic_CopulaGAN_path+st.session_state.prefix+'.csv',
-                mime='text/csv')
-
-                #3. GaussianCopula
-                st.write('GaussianCopula Sample:')
-                st.write(GaussianCopula_model.sample(num_rows=sample_size))
-                st.success('Done!')
-                
-                df_GaussianCopula = pd.read_csv(synthetic_GaussianCopula_path)
-                def convert_df(df_GaussianCopula):
-                    # IMPORTANT: Cache the conversion to prevent computation on every rerun
-                    return df_GaussianCopula.to_csv().encode('utf-8')
-
-                csv = convert_df(df_GaussianCopula)
-                st.download_button(
-                label="Download data as CSV",
-                data=csv,
-                file_name=synthetic_GaussianCopula_path+st.session_state.prefix+'.csv',
-                mime='text/csv')
-
-                #4. CTGAN
-                st.write('CTGAN Sample:')
-                st.write(CTGAN_model.sample(num_rows=sample_size))
-                st.success('Done!')
-                
-                df_CTGAN = pd.read_csv(synthetic_CTGAN_path)
-                def convert_df(df_CTGAN):
-                    # IMPORTANT: Cache the conversion to prevent computation on every rerun
-                    return df.to_csv().encode('utf-8')
-
-                csv = convert_df(df_CTGAN)
-
-                st.download_button(
-                label="Download data as CSV",
-                data=csv,
-                file_name=synthetic_CTGAN_path+st.session_state.prefix+'.csv',
-                mime='text/csv')
+            for model_path in model_paths:
+                isExist = os.path.exists(model_path)
+                if isExist == True:
+                    os.remove(model_path)
 
 
-                #5. TVAE
-                st.write('TVAE Sample:')
-                st.write(TVAE_model.sample(num_rows=sample_size))
-                st.success('Done!')
+            #specify fit and save model
+            #1. Tabular Preset
+            TabularPreset_model = TabularPreset(name='FAST_ML', metadata=df.info())
+            TabularPreset_model.fit(df)
+            TabularPreset_model.save(model_TabularPreset_path)
 
-                
-                df_TVAE = pd.read_csv(synthetic_TVAE_path)
-                def convert_df(df_TVAE):
-                    # IMPORTANT: Cache the conversion to prevent computation on every rerun
-                    return df.to_csv().encode('utf-8')
+            #2. CopulaGAN
+            CopulaGAN_model = CopulaGAN()
+            CopulaGAN_model.fit(df)
+            CopulaGAN_model.save(model_CopulaGAN_path)
 
-                csv = convert_df(df_TVAE)
+            #3. CTGAN
+            CTGAN_model = CTGAN()
+            data=df
+            CTGAN_model.fit(data)
+            CTGAN_model.save(model_CTGAN_path)
 
-                st.download_button(
-                label="Download data as CSV",
-                data=csv,
-                file_name=synthetic_TVAE_path+st.session_state.prefix+'.csv',
-                mime='text/csv')
+            #4. GaussianCopula
+            GaussianCopula_model = GaussianCopula()
+            GaussianCopula_model.fit(df)
+            GaussianCopula_model.save(model_GaussianCopula_path)
+
+            #5. TVAE
+            TVAE_model = GaussianCopula()
+            TVAE_model.fit(df)
+            TVAE_model.save(model_TVAE_path)
+
+            #Generate Datasets
+            if st.button('Generate'):
+                with st.spinner('Wait for it...'):
+                    time.sleep(5)
+                    #TVAE_synthetic_data = model.sample(num_rows=sample_size)
+
+                    model_paths = [synthetic_TVAE_path, synthetic_CopulaGAN_path, synthetic_CTGAN_path,synthetic_TabularPreset_path,synthetic_GaussianCopula_path ]
+                    for model_path in model_paths:
+                        isExist = os.path.exists(model_path )
+                        if isExist == True:
+                            os.remove(model_path)
+
+                    #save synthetic data
+                    #1. Tabular Preset
+                    TabularPreset_model.sample(num_rows=sample_size, output_file_path=synthetic_TabularPreset_path)
+                    #2. TVAE
+                    TVAE_model.sample(num_rows=sample_size, output_file_path=synthetic_TVAE_path)
+                    #3. CTGAN
+                    CTGAN_model.sample(num_rows=sample_size, output_file_path=synthetic_CTGAN_path)
+                    #4. GaussianCopula_model
+                    GaussianCopula_model.sample(num_rows=sample_size, output_file_path=synthetic_GaussianCopula_path)
+                    #5. CopulaGAN
+                    CopulaGAN_model.sample(num_rows=sample_size, output_file_path=synthetic_CopulaGAN_path)
+                    #TabularPresetReport = QualityReport()
+
+                    #displaying previews
+                    #1. TabularPreset
+                    st.write('Tabular Preset Sample:')
+                    st.write(TabularPreset_model.sample(num_rows=sample_size))
+                    st.success('Done!')
+
+                    #Download Button
+                    df_TabularPreset = pd.read_csv(synthetic_TabularPreset_path)
+                    def convert_df(df_TabularPreset):
+                        # IMPORTANT: Cache the conversion to prevent computation on every rerun
+                        return dataframe.to_csv().encode('utf-8')
+
+                    csv = convert_df(df_TabularPreset)
+                    st.download_button(
+                    label="Download data as CSV",
+                    data=csv,
+                    file_name=synthetic_TabularPreset_path+st.session_state.prefix+'.csv',
+                    mime='text/csv')
+
+                    #2. CopulaGAN
+                    st.write('CopulaGAN Sample:')
+                    st.write(CopulaGAN_model.sample(num_rows=sample_size))
+                    st.success('Done!')
+
+                    df_CopulaGAN = pd.read_csv(synthetic_CopulaGAN_path)
+                    def convert_df(df_CopulaGAN):
+                        # IMPORTANT: Cache the conversion to prevent computation on every rerun
+                        return df_CopulaGAN.to_csv().encode('utf-8')
+
+                    csv = convert_df(df_CopulaGAN)
+                    st.download_button(
+                    label="Download data as CSV",
+                    data=csv,
+                    file_name=synthetic_CopulaGAN_path+st.session_state.prefix+'.csv',
+                    mime='text/csv')
+
+                    #3. GaussianCopula
+                    st.write('GaussianCopula Sample:')
+                    st.write(GaussianCopula_model.sample(num_rows=sample_size))
+                    st.success('Done!')
+
+                    df_GaussianCopula = pd.read_csv(synthetic_GaussianCopula_path)
+                    def convert_df(df_GaussianCopula):
+                        # IMPORTANT: Cache the conversion to prevent computation on every rerun
+                        return df_GaussianCopula.to_csv().encode('utf-8')
+
+                    csv = convert_df(df_GaussianCopula)
+                    st.download_button(
+                    label="Download data as CSV",
+                    data=csv,
+                    file_name=synthetic_GaussianCopula_path+st.session_state.prefix+'.csv',
+                    mime='text/csv')
+
+                    #4. CTGAN
+                    st.write('CTGAN Sample:')
+                    st.write(CTGAN_model.sample(num_rows=sample_size))
+                    st.success('Done!')
+
+                    df_CTGAN = pd.read_csv(synthetic_CTGAN_path)
+                    def convert_df(df_CTGAN):
+                        # IMPORTANT: Cache the conversion to prevent computation on every rerun
+                        return df.to_csv().encode('utf-8')
+
+                    csv = convert_df(df_CTGAN)
+
+                    st.download_button(
+                    label="Download data as CSV",
+                    data=csv,
+                    file_name=synthetic_CTGAN_path+st.session_state.prefix+'.csv',
+                    mime='text/csv')
 
 
-                # st.download_button(
-                # label="Download data as Zip File",
-                # data = csv,
-                # file_name=st.session_state.prefix+'.csv',
-                # mime='text/csv',)
-        else:
-            st.write('Enter the number of rows of synthetic data you want to generate')
+                    #5. TVAE
+                    st.write('TVAE Sample:')
+                    st.write(TVAE_model.sample(num_rows=sample_size))
+                    st.success('Done!')
+
+
+                    df_TVAE = pd.read_csv(synthetic_TVAE_path)
+                    def convert_df(df_TVAE):
+                        # IMPORTANT: Cache the conversion to prevent computation on every rerun
+                        return df.to_csv().encode('utf-8')
+
+                    csv = convert_df(df_TVAE)
+
+                    st.download_button(
+                    label="Download data as CSV",
+                    data=csv,
+                    file_name=synthetic_TVAE_path+st.session_state.prefix+'.csv',
+                    mime='text/csv')
+
+
+                    # st.download_button(
+                    # label="Download data as Zip File",
+                    # data = csv,
+                    # file_name=st.session_state.prefix+'.csv',
+                    # mime='text/csv',)
+            else:
+                st.write('Enter the number of rows of synthetic data you want to generate')
 #
 #     def generate(complete_name):
 #         st.write('Generated data')
@@ -335,61 +342,67 @@ with tab2:
 # generate(complete_name)       
 
 with tab3:
-    #Distribution of the real data:
-    st.write('Distribution of real data')
-    df_real = pd.read_csv(dir+st.session_state.prefix+'.csv')
-    np_real = df_real.to_numpy()
-    np_real = np.random.normal(1, 1, size=50)
-    fig, ax = plt.subplots()
-    ax.hist(np_real, bins=20)
-    st.pyplot(fig)
+    file = dir+st.session_state.prefix+'.csv'
+    if file_exist(file):
+        #Distribution of the real data:
+        st.write('Distribution of real data')
+        df_real = pd.read_csv(file)
+        np_real = df_real.to_numpy()
+        np_real = np.random.normal(1, 1, size=50)
+        fig, ax = plt.subplots()
+        ax.hist(np_real, bins=20)
+        st.pyplot(fig)
 
-    #Distribution of the Tabular Preset data:
-    st.write('Distribution of TabularPreset data')
-    df_TabularPreset = pd.read_csv(synthetic_TabularPreset_path)
-    np_TabularPreset = df_TabularPreset.to_numpy()
-    np_TabularPreset = np.random.normal(1, 1, size=50)
-    fig, ax = plt.subplots()
-    ax.hist(np_TabularPreset, bins=20)
-    st.pyplot(fig)
-    
+        # Distribution of the Tabular Preset data:
+        if file_exist(synthetic_TabularPreset_path):
+            st.write('Distribution of TabularPreset data')
+            df_TabularPreset = pd.read_csv(synthetic_TabularPreset_path)
+            np_TabularPreset = df_TabularPreset.to_numpy()
+            np_TabularPreset = np.random.normal(1, 1, size=50)
+            fig, ax = plt.subplots()
+            ax.hist(np_TabularPreset, bins=20)
+            st.pyplot(fig)
 
-    #Distribution of the TVAE data:
-    st.write('Distribution of TVAE data')
-    df_TVAE = pd.read_csv(synthetic_TVAE_path)
-    np_TVAE = df_TVAE.to_numpy()
-    np_TVAE = np.random.normal(1, 1, size=50)
-    fig, ax = plt.subplots()
-    ax.hist(np_TVAE, bins=20)
-    st.pyplot(fig)
 
-    #Distribution of the GaussianCopula  data:
-    st.write('Distribution of GaussianCopula data')
-    df_GaussianCopula = pd.read_csv(synthetic_GaussianCopula_path)
-    np_GaussianCopula = df_GaussianCopula.to_numpy()
-    np_GaussianCopula = np.random.normal(1, 1, size=50)
-    fig, ax = plt.subplots()
-    ax.hist(np_GaussianCopula, bins=20)
-    st.pyplot(fig)
+        #Distribution of the TVAE data:
+        if file_exist(synthetic_TVAE_path):
+            st.write('Distribution of TVAE data')
+            df_TVAE = pd.read_csv(synthetic_TVAE_path)
+            np_TVAE = df_TVAE.to_numpy()
+            np_TVAE = np.random.normal(1, 1, size=50)
+            fig, ax = plt.subplots()
+            ax.hist(np_TVAE, bins=20)
+            st.pyplot(fig)
 
-    #Score of the CTGAN  data:
-    st.write('Distribution of CTGAN data')
-    df_CTGAN = pd.read_csv(synthetic_CTGAN_path)
-    np_CTGAN = df_CTGAN.to_numpy()
-    np_CTGAN = np.random.normal(1, 1, size=50)
-    fig, ax = plt.subplots()
-    ax.hist(np_CTGAN, bins=20)
-    st.pyplot(fig)
+        #Distribution of the GaussianCopula  data:
+        if file_exist(synthetic_GaussianCopula_path):
+            st.write('Distribution of GaussianCopula data')
+            df_GaussianCopula = pd.read_csv(synthetic_GaussianCopula_path)
+            np_GaussianCopula = df_GaussianCopula.to_numpy()
+            np_GaussianCopula = np.random.normal(1, 1, size=50)
+            fig, ax = plt.subplots()
+            ax.hist(np_GaussianCopula, bins=20)
+            st.pyplot(fig)
 
-    #Score of the CopulaGAN  data:
+        #Score of the CTGAN  data:
+        if file_exist(synthetic_CTGAN_path):
+            st.write('Distribution of CTGAN data')
+            df_CTGAN = pd.read_csv(synthetic_CTGAN_path)
+            np_CTGAN = df_CTGAN.to_numpy()
+            np_CTGAN = np.random.normal(1, 1, size=50)
+            fig, ax = plt.subplots()
+            ax.hist(np_CTGAN, bins=20)
+            st.pyplot(fig)
 
-    st.write('Distribution of CopulaGAN data')
-    df_CopulaGAN = pd.read_csv(synthetic_CopulaGAN_path)
-    np_CopulaGAN = df_CopulaGAN.to_numpy()
-    np_CopulaGAN = np.random.normal(1, 1, size=50)
-    fig, ax = plt.subplots()
-    ax.hist(np_CopulaGAN, bins=20)
-    st.pyplot(fig)
+        #Score of the CopulaGAN  data:
+        if file_exist(synthetic_CopulaGAN_path):
+            st.write('Distribution of CopulaGAN data')
+            df_CopulaGAN = pd.read_csv(synthetic_CopulaGAN_path)
+            np_CopulaGAN = df_CopulaGAN.to_numpy()
+            np_CopulaGAN = np.random.normal(1, 1, size=50)
+            fig, ax = plt.subplots()
+            ax.hist(np_CopulaGAN, bins=20)
+            st.pyplot(fig)
 
 
 

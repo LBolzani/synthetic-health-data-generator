@@ -5,6 +5,9 @@ import os
 import pathlib
 from os import listdir
 from os.path import isfile, join
+from sdv.tabular import GaussianCopula
+from sdv.evaluation import evaluate
+
 
 import sys, os
 setupBaseDir = os.path.dirname(__file__)
@@ -30,7 +33,7 @@ with st.form(key ='Form1'):
         data_type = st.sidebar.radio('Data Format', ('SingleTable', 'MultiTable'))
         num_of_tweets = st.sidebar.number_input('Number of rows to evaluate with', 100)
         submitted1 = st.form_submit_button(label = 'Evaluate Model')
-
+        #model = GaussianCopula.load(option6)
 
 #option1 = st.selectbox( 'What industry would you like to see data for?', ("Biology", "clinical_patient_histories"))
 #option7 = st.sidebar.selectbox('Model ID:', ("Biology", "clinical_patient_histories"))
