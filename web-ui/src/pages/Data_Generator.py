@@ -19,6 +19,8 @@ import seaborn as sns
 from scipy import stats
 from scipy.stats import kstest
 from sdv.evaluation import evaluate
+import mitosheet
+
 
 #session state management
 if 'prefix' not in st.session_state:
@@ -73,7 +75,9 @@ with tab1:
         #save real file
         dataframe.to_csv(dir+st.session_state.prefix+'.csv', sep=',' ) 
         st.write(dir+st.session_state.prefix+'.csv')
-        st.write(dataframe)
+        #st.write(dataframe)
+        mitosheet.sheet(dataframe)
+
         st.write('Generate synthetic data based on the uploaded dataset in the generate data tab')
     else:
         counter = 1
@@ -88,8 +92,15 @@ with tab1:
             st.write(dir+st.session_state.prefix+'_'+str(counter)+'.csv')
             dataframe.to_csv(dir+st.session_state.prefix+'_'+str(counter)+'.csv', sep=',' )
             dataframe = dataframe.append(dataframe_collection, ignore_index=True)
-            # complete_name = dir+prefix+'_'+str(counter)+'.csv'
-            counter +=1
+
+            #collect metadata
+            for col in dataframe:
+                st.text_input(
+                "Please select the primary key",
+                "This is a placeholder",
+                key="placeholder")
+                # complete_name = dir+prefix+'_'+str(counter)+'.csv'
+                counter +=1
         st.write(dataframe_collection)
         
         st.write('Generate synthetic data based on the uploaded dataset on the generate data tab')
