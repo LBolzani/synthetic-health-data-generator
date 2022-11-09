@@ -133,3 +133,4 @@ dmypy.json
 
 #Data folder
 web-ui/src/data/**/*.csv
+web-ui/src/data/**/*.pkl
