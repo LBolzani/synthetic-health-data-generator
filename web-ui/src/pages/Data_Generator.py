@@ -62,7 +62,7 @@ st.write("""
 option3 = st.sidebar.selectbox('What type of data do you have?', ("singleCSVTable", "multipleCSVTables"))
 
 st.write('Model ID:')
-st.write(st.session_state.prefix)
+st.write(st.session_state.prefix+'.pkl')
 
 tab1, tab2 = st.tabs(["Real Data", "Generate Data"])
 
@@ -138,32 +138,40 @@ with tab2:
             ctgan_selected = st.checkbox("CTGAN Model")
             gaussian_copula_selected = st.checkbox("GaussianCopula Model")
             tvae_selected = st.checkbox("TVAE Model")
+
             st.write('Enter the number of rows of synthetic data you want to generate')
             sample_size = st.number_input('Rows', min_value=1, max_value=100000, value=5, step=1)
             #Generate Datasets
             if st.button('Generate'):
+                model_and_data_paths = ['model_TVAE_path', 'model_CopulaGAN_path', 'model_CTGAN_path',
+                            'model_GaussianCopula_path', 'model_TabularPreset_path', 'synthetic_TVAE_path','synthetic_CopulaGAN_path', 'synthetic_CTGAN_path', 'synthetic_TabularPreset_path', 'synthetic_TabularPreset_path', 'synthetic_GaussianCopula_path']
+               
+               #Not working --needs  fix
+                for paths in model_and_data_paths:
+                    isExist = os.path.exists(paths)
+                    if isExist == True:
+                        os.remove(paths)
+
                 with st.spinner('Wait for it...'):
                     time.sleep(5)
 
                     df = pd.read_csv(file)
 
-                    model_paths = ['model_TVAE_path', 'model_CopulaGAN_path', 'model_CTGAN_path',
-                                   'model_GaussianCopula_path', 'model_TabularPreset_path']
 
-                    for model_path in model_paths:
-                        isExist = os.path.exists(model_path)
-                        if isExist == True:
-                            os.remove(model_path)
 
                     col1,col2=st.columns(2)
                     with col1:
+
                         # specify fit and save model
                         # 1. Tabular Preset
-                        if tabular_selected:
+
+                        if tabular_selected:                            
                             TabularPreset_model = TabularPreset(name='FAST_ML', metadata=df.info())
                             TabularPreset_model.fit(df)
                             TabularPreset_model.save(model_TabularPreset_path)
                             # 1. Tabular Preset
+
+                     
                             TabularPreset_model.sample(num_rows=sample_size, output_file_path=synthetic_TabularPreset_path)
                             # 1. TabularPreset
                             st.write('Tabular Preset Sample:')
