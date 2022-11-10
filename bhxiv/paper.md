@@ -9,9 +9,14 @@ authors:
   - name: Núria Queralt-Rosinach
     orcid: 0000-0003-0169-8159
     affiliation: 1
+  - name: Muhammad Shoaib
+    orcid: 0000-0002-4854-4635
+    affiliation: 2
 affiliations:
   - name: Human Genetics, Leiden University Medical Center, Leiden, Netherlands
     index: 1
+  - name: Luxembourg Center for Systems Biomedicine, University of Luxembourg, Luxembourg
+    index: 2
 date: 11 November 2022
 cito-bibliography: paper.bib
 event: BioHackEU22
