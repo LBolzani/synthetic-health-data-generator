@@ -75,8 +75,12 @@ class Evaluator:
         )
 
     def plot_correlation(self):
+        fig = plt.figure(figsize=(10, 10))
+
         corr = self.df_encoded_or.corrwith(self.df_encoded_sy).abs()
-        return corr.plot.bar()
+        ax = fig.add_axes([0,0,1,1])
+        corr.plot.bar(ax = ax)
+        return fig
 
     def plot_data_2dims(self):
         return plot_dfs_2d(self.pca_comps_or, self.pca_comps_sy)

@@ -83,7 +83,6 @@ def create_plots(comps_or, comps_sy, labels_or, labels_sy, output=None):
     plt.subplots_adjust(wspace=0.10)
     plt.subplots_adjust(hspace=0.20)
 
-    fig.savefig("../plots/data_low_dimensional.png")
     return fig
 
 def plot_dfs_2d(comps_or, comps_sy):
