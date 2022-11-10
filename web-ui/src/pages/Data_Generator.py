@@ -22,6 +22,7 @@ from sdv.evaluation import evaluate
 import mitosheet
 import glob
 import random
+from sdv import Metadata
 
 #session state management
 if 'prefix' not in st.session_state:
@@ -345,15 +346,17 @@ with tab2:
                 #st.write(df.columns)
                 keys = random.sample(range(1000, 9999), len(df.columns))
                 primary_key = st.selectbox('Which column is the primary key for table:'+str(i+1),( df.columns), key=keys[i])
-                
-
                 #append dataframes for later use
                 dfs.append(df)
 
         with col2:
             txt = st.text_area( 'Paste here metadata.json')
+            st.write(dfs)
 
-    
+        if st.button('Generate Synthetic Data'):
+            st.write('Why hello there')
+
+
             #st.write(file_names)
             
 
