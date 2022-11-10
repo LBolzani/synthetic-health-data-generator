@@ -11,6 +11,7 @@ setupBaseDir = os.path.dirname(__file__)
 sys.path.insert(0, setupBaseDir)
 
 real_dir = os.path.join(setupBaseDir, "../data/single_table/real/")
+real_multi_dir = os.path.join(setupBaseDir, "../data/multi_table/real/")
 model_TVAE_dir = os.path.join(setupBaseDir, "../data/single_table/models/TVAE/")
 model_CopulaGAN_dir = os.path.join(setupBaseDir, "../data/single_table/models/CopulaGAN/")
 model_CTGAN_dir = os.path.join(setupBaseDir, "../data/single_table/models/CTGAN/")

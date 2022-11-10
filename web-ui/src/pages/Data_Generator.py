@@ -20,7 +20,8 @@ from scipy import stats
 from scipy.stats import kstest
 from sdv.evaluation import evaluate
 import mitosheet
-
+import glob
+import random
 
 #session state management
 if 'prefix' not in st.session_state:
@@ -28,6 +29,7 @@ if 'prefix' not in st.session_state:
 
 #specifying directories
 real_dir = os.path.join(setupBaseDir, "../data/single_table/real/")
+real_multi_dir = os.path.join(setupBaseDir, "../data/multi_table/real/")
 model_TVAE_dir = os.path.join(setupBaseDir, "../data/single_table/models/TVAE/")
 model_CopulaGAN_dir = os.path.join(setupBaseDir, "../data/single_table/models/CopulaGAN/")
 model_CTGAN_dir = os.path.join(setupBaseDir, "../data/single_table/models/CTGAN/")
@@ -46,6 +48,13 @@ synthetic_CTGAN_path = synthetic_CTGAN_dir+st.session_state.prefix+'.csv'
 synthetic_TabularPreset_path = synthetic_TabularPreset_dir+st.session_state.prefix+'.csv'
 synthetic_GaussianCopula_path = synthetic_GaussianCopula_dir+st.session_state.prefix+'.csv'
 
+#check if files already exist
+model_TVAE_path = model_TVAE_dir+st.session_state.prefix+'.pkl'
+model_CopulaGAN_path = model_CopulaGAN_dir+st.session_state.prefix+'.pkl'
+model_CTGAN_path = model_CTGAN_dir+st.session_state.prefix+'.pkl'
+model_GaussianCopula_path = model_GaussianCopula_dir+st.session_state.prefix+'.pkl'
+model_TabularPreset_path = model_TabularPreset_dir+st.session_state.prefix+'.pkl'
+
 #Begin
 st.write("""
 # SYNTHETIC DATA AND MODEL GENERATOR
@@ -62,48 +71,42 @@ tab1, tab2, tab3 = st.tabs(["Real Data", "Generate Data", "Evaluations"])
 
 with tab1:
     if option3 == 'singleCSVTable':
-        dir = os.path.join(setupBaseDir, "../data/single_table/real/")
+        real_dir = os.path.join(setupBaseDir, "../data/single_table/real/")
         uploaded_files = st.file_uploader("Choose a file")
         dataframe = pd.read_csv(uploaded_files)
 
         #check if file exists
-        real_path = dir+st.session_state.prefix+'.csv'
+        real_path = real_dir+st.session_state.prefix+'.csv'
         isExist = os.path.exists(real_path)
         if isExist == True:
             os.remove(real_path)
 
         #save real file
-        dataframe.to_csv(dir+st.session_state.prefix+'.csv', sep=',' ) 
-        st.write(dir+st.session_state.prefix+'.csv')
-        #st.write(dataframe)
-        mitosheet.sheet(dataframe)
+        dataframe.to_csv(real_dir+st.session_state.prefix+'.csv', sep=',' ) 
+        st.write(real_dir+st.session_state.prefix+'.csv')
+
 
         st.write('Generate synthetic data based on the uploaded dataset in the generate data tab')
     else:
-        counter = 1
-        uploaded_files = st.file_uploader("Choose CSV files", accept_multiple_files=True, key =counter)
+        
+        uploaded_files = st.file_uploader("Choose CSV files", accept_multiple_files=True)
         
         dataframe_collection = {}
 
-        for uploaded_file in uploaded_files:
-            dir = os.path.join(setupBaseDir, "../data/multi_table/real/")
-            dataframe = pd.read_csv(uploaded_file)
-            dataframe_collection[counter] = dataframe
-            st.write(dir+st.session_state.prefix+'_'+str(counter)+'.csv')
-            dataframe.to_csv(dir+st.session_state.prefix+'_'+str(counter)+'.csv', sep=',' )
-            dataframe = dataframe.append(dataframe_collection, ignore_index=True)
-
-            #collect metadata
-            for col in dataframe:
-                st.text_input(
-                "Please select the primary key",
-                "This is a placeholder",
-                key="placeholder")
-                # complete_name = dir+prefix+'_'+str(counter)+'.csv'
-                counter +=1
-        st.write(dataframe_collection)
+        counter = 1
+        if uploaded_files == None:
+            st.write('Generate synthetic data based on the uploaded dataset on the generate data tab')
+        else:
+            for uploaded_file in uploaded_files:
+                dataframe = pd.read_csv(uploaded_file)
+                dataframe_collection[counter] = dataframe
+                st.write(real_multi_dir+st.session_state.prefix+'_'+str(counter)+'.csv')
+                dataframe.to_csv(real_multi_dir+st.session_state.prefix+'_'+str(counter)+'.csv', sep=',' )
+                dataframe = dataframe.append(dataframe_collection, ignore_index=True)
+                st.write(dataframe)
+                counter = counter + 1
         
-        st.write('Generate synthetic data based on the uploaded dataset on the generate data tab')
+        
             # bytes_data = uploaded_file.read()
             # st.write("filename:",complete_name)
             # st.write(bytes_data)
@@ -157,12 +160,7 @@ with tab2:
         #reading current file(s)
         df = pd.read_csv(real_dir+st.session_state.prefix+'.csv')
 
-        #check if files already exist
-        model_TVAE_path = model_TVAE_dir+st.session_state.prefix+'.pkl'
-        model_CopulaGAN_path = model_CopulaGAN_dir+st.session_state.prefix+'.pkl'
-        model_CTGAN_path = model_CTGAN_dir+st.session_state.prefix+'.pkl'
-        model_GaussianCopula_path = model_GaussianCopula_dir+st.session_state.prefix+'.pkl'
-        model_TabularPreset_path = model_TabularPreset_dir+st.session_state.prefix+'.pkl'
+
 
         model_paths = ['model_TVAE_path', 'model_CopulaGAN_path', 'model_CTGAN_path','model_GaussianCopula_path', 'model_TabularPreset_path']
 
@@ -321,88 +319,133 @@ with tab2:
                 # data = csv,
                 # file_name=st.session_state.prefix+'.csv',
                 # mime='text/csv',)
-        else:
-            st.write('Enter the number of rows of synthetic data you want to generate')
-#
-#     def generate(complete_name):
-#         st.write('Generated data')
-#         if option0 == 'singleTable':
-#             if option == 'TabularPreset':
-#                 df = pd.read_csv(complete_name)
-#                 model = TabularPreset(name='FAST_ML', metadata=df.info())
-#                 model.fit(df)
-#                 model.save('TabularPresetModel.pkl')
-#                 metadata_obj = df.info()
-#                 synthetic_data = model.sample(num_rows=sample_size)
-#                 model.sample(num_rows=sample_size, output_file_path='synthetic_tabular_preset_data0.csv')
-#                 TabularPresetReport = QualityReport()
-#                 save_path = os.path.join(parent_path, "data")
-#                 complete_name = os.path.join(save_path, f"{prefix}_{'TabularPreset_report9.pkl'}")
-#                 TabularPresetReport.save(filepath=prefix.join('TabularPreset_report9.pkl'))
-#             else:
-#                 st.write('No option')   
-#         else:
-#             st.write('No option')  
-# generate(complete_name)       
+    else:
+        #Ask for sample size
+        sample_size = st.text_input('Enter the number of rows of synthetic data you want to generate',5)
+        #saving links for real and synthetic data and models
+        #a)real data
+
+        counter = 0
+
+        #file_list = [filename for filename in os.listdir(real_multi_dir) if filename.startswith(st.session_state.prefix)]
+        
+        file_count = len([filename for filename in os.listdir(real_multi_dir) if filename.startswith(st.session_state.prefix)])
+        
+        dfs = []
+        file_names = []
+        #Generating real dataframes
+        #listing file names
+        col1, col2 = st.columns(2)
+        with col1:
+            for i in range(file_count):
+                multi_file=real_multi_dir+st.session_state.prefix+'_'+str(i+1)+'.csv'
+                df = pd.read_csv(multi_file)
+                #file_names.append(multi_file)
+                #primary_key = st.selectbox('which column is the primary key?', (df.columns))
+                #st.write(df.columns)
+                keys = random.sample(range(1000, 9999), len(df.columns))
+                primary_key = st.selectbox('Which column is the primary key for table:'+str(i+1),( df.columns), key=keys[i])
+                
+
+                #append dataframes for later use
+                dfs.append(df)
+
+        with col2:
+            txt = st.text_area( 'Paste here metadata.json')
+
+    
+            #st.write(file_names)
+            
+
+            #extracting dataframes
+
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        #st.write(df)
+
+        #b)synthetic data by model
+
+
+        #c) models
+
+        #save the dataframes
+
+
+        #Ask for related columns
+
+
+
 
 with tab3:
-    #Distribution of the real data:
-    st.write('Distribution of real data')
-    df_real = pd.read_csv(dir+st.session_state.prefix+'.csv')
-    np_real = df_real.to_numpy()
-    np_real = np.random.normal(1, 1, size=50)
-    fig, ax = plt.subplots()
-    ax.hist(np_real, bins=20)
-    st.pyplot(fig)
+    if option3 == 'singleCSVTable':
+        #Distribution of the real data:
+        st.write('Distribution of real data')
+        df_real = pd.read_csv(real_dir+st.session_state.prefix+'.csv')
+        np_real = df_real.to_numpy()
+        np_real = np.random.normal(1, 1, size=50)
+        fig, ax = plt.subplots()
+        ax.hist(np_real, bins=20)
+        st.pyplot(fig)
 
-    #Distribution of the Tabular Preset data:
-    st.write('Distribution of TabularPreset data')
-    df_TabularPreset = pd.read_csv(synthetic_TabularPreset_path)
-    np_TabularPreset = df_TabularPreset.to_numpy()
-    np_TabularPreset = np.random.normal(1, 1, size=50)
-    fig, ax = plt.subplots()
-    ax.hist(np_TabularPreset, bins=20)
-    st.pyplot(fig)
-    
+        #Distribution of the Tabular Preset data:
+        st.write('Distribution of TabularPreset data')
+        df_TabularPreset = pd.read_csv(synthetic_TabularPreset_path)
+        np_TabularPreset = df_TabularPreset.to_numpy()
+        np_TabularPreset = np.random.normal(1, 1, size=50)
+        fig, ax = plt.subplots()
+        ax.hist(np_TabularPreset, bins=20)
+        st.pyplot(fig)
+        
 
-    #Distribution of the TVAE data:
-    st.write('Distribution of TVAE data')
-    df_TVAE = pd.read_csv(synthetic_TVAE_path)
-    np_TVAE = df_TVAE.to_numpy()
-    np_TVAE = np.random.normal(1, 1, size=50)
-    fig, ax = plt.subplots()
-    ax.hist(np_TVAE, bins=20)
-    st.pyplot(fig)
+        #Distribution of the TVAE data:
+        st.write('Distribution of TVAE data')
+        df_TVAE = pd.read_csv(synthetic_TVAE_path)
+        np_TVAE = df_TVAE.to_numpy()
+        np_TVAE = np.random.normal(1, 1, size=50)
+        fig, ax = plt.subplots()
+        ax.hist(np_TVAE, bins=20)
+        st.pyplot(fig)
 
-    #Distribution of the GaussianCopula  data:
-    st.write('Distribution of GaussianCopula data')
-    df_GaussianCopula = pd.read_csv(synthetic_GaussianCopula_path)
-    np_GaussianCopula = df_GaussianCopula.to_numpy()
-    np_GaussianCopula = np.random.normal(1, 1, size=50)
-    fig, ax = plt.subplots()
-    ax.hist(np_GaussianCopula, bins=20)
-    st.pyplot(fig)
+        #Distribution of the GaussianCopula  data:
+        st.write('Distribution of GaussianCopula data')
+        df_GaussianCopula = pd.read_csv(synthetic_GaussianCopula_path)
+        np_GaussianCopula = df_GaussianCopula.to_numpy()
+        np_GaussianCopula = np.random.normal(1, 1, size=50)
+        fig, ax = plt.subplots()
+        ax.hist(np_GaussianCopula, bins=20)
+        st.pyplot(fig)
 
-    #Score of the CTGAN  data:
-    st.write('Distribution of CTGAN data')
-    df_CTGAN = pd.read_csv(synthetic_CTGAN_path)
-    np_CTGAN = df_CTGAN.to_numpy()
-    np_CTGAN = np.random.normal(1, 1, size=50)
-    fig, ax = plt.subplots()
-    ax.hist(np_CTGAN, bins=20)
-    st.pyplot(fig)
+        #Score of the CTGAN  data:
+        st.write('Distribution of CTGAN data')
+        df_CTGAN = pd.read_csv(synthetic_CTGAN_path)
+        np_CTGAN = df_CTGAN.to_numpy()
+        np_CTGAN = np.random.normal(1, 1, size=50)
+        fig, ax = plt.subplots()
+        ax.hist(np_CTGAN, bins=20)
+        st.pyplot(fig)
 
-    #Score of the CopulaGAN  data:
+        #Score of the CopulaGAN  data:
 
-    st.write('Distribution of CopulaGAN data')
-    df_CopulaGAN = pd.read_csv(synthetic_CopulaGAN_path)
-    np_CopulaGAN = df_CopulaGAN.to_numpy()
-    np_CopulaGAN = np.random.normal(1, 1, size=50)
-    fig, ax = plt.subplots()
-    ax.hist(np_CopulaGAN, bins=20)
-    st.pyplot(fig)
+        st.write('Distribution of CopulaGAN data')
+        df_CopulaGAN = pd.read_csv(synthetic_CopulaGAN_path)
+        np_CopulaGAN = df_CopulaGAN.to_numpy()
+        np_CopulaGAN = np.random.normal(1, 1, size=50)
+        fig, ax = plt.subplots()
+        ax.hist(np_CopulaGAN, bins=20)
+        st.pyplot(fig)
+    else:
+        st.write('Generate something')
 
 
-
-# with tab4:
-#     st.write('Benchmarking report')
