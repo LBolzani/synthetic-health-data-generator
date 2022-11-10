@@ -49,7 +49,7 @@ with col3:
         if uploaded_file is not None:
             df_real_data = pd.read_csv(uploaded_file)
             df_synth_data = pd.read_csv("/Users/luca.bolzani/Downloads/SyntheticModels/CopulaGAN_beta.csv")
-            evaluator = Evaluator(df_real_data, df_synth_data, df_real_data['diagnosis'])
+            evaluator = Evaluator(df_real_data, df_synth_data, df_real_data.loc['diagnosis'])
             evaluator.preprocess()
             evaluator.do_clustering()
 
