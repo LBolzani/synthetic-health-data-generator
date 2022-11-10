@@ -8,10 +8,8 @@ import os
 
 st.set_page_config(layout="wide")
 st.markdown("<h1 style='text-align: center;'>Synthetic data tool</h1>", unsafe_allow_html=True)
-st.write(os.path.dirname(__file__))
 
 base_file = os.path.join(os.path.dirname(__file__), '../../evaluators/')
-st.write(base_file)
 
 
 df_real_data = pd.read_csv(base_file + "test/resources/data/breast_cancer_df.csv")
