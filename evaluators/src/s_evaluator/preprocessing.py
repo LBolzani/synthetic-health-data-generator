@@ -16,7 +16,8 @@ def get_encoded_df(df_or, df_sy):
         le = LabelEncoder()
         le.fit(df_or[feature])
         df_encoded_or[feature] = le.transform(df_or[feature])
-        df_encoded_sy[feature] = le.transform(df_sy[feature])
+        if feature in df_sy.columns:
+            df_encoded_sy[feature] = le.transform(df_sy[feature])
         label_encoders[feature] = le
 
     return label_encoders, df_encoded_or, df_encoded_sy

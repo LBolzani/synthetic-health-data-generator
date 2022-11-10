@@ -1,11 +1,12 @@
 import pandas as pd
 import streamlit as st
+import os
 
 from s_evaluator.evaluator import Evaluator
 
 st.set_page_config(layout="wide")
 st.markdown("<h1 style='text-align: center;'>Synthetic data tool</h1>", unsafe_allow_html=True)
-
+st.write(os.path.dirname(__file__))
 col1, col2, col3 = st.columns([6,12,6], gap="medium")
 upload_file = None
 figure = None
@@ -46,18 +47,21 @@ with col3:
                                ('PCA', 'SVD', 'Randomforest', 'Linear Regression', 'Classification', 'Real vs Synth Data'))
 
     if st.button('Evaluate'):
-        if uploaded_file is not None:
-            df_real_data = pd.read_csv(uploaded_file)
-            df_synth_data = pd.read_csv("/Users/luca.bolzani/Downloads/SyntheticModels/CopulaGAN_beta.csv")
-            evaluator = Evaluator(df_real_data, df_synth_data, df_real_data.loc['diagnosis'])
-            evaluator.preprocess()
-            evaluator.do_clustering()
+        #if uploaded_file is None:
+        df_real_data = pd.read_csv("../../evaluators/test/resources/data/breast_cancer_df.csv")
+        df_synth_data = pd.read_csv("../../evaluators/test/resources/data/SyntheticModels/CopulaGAN_beta.csv")
 
-            if evaluators_algo == 'PCA':
-                figure = evaluator.plot_pca()
-
+        evaluator = Evaluator(df_real_data, df_synth_data, df_real_data['diagnosis'])
+        evaluator.preprocess()
+        evaluator.do_clustering()
+        figure = evaluator.plot_pca()
+        if evaluators_algo == 'PCA':
+            figure = evaluator.plot_pca()
         else:
-            st.error("Please upload a file")
+            st.write("Did nothing")
+
+     #   else:
+     #       st.error("Please upload a file")
 
 
 
