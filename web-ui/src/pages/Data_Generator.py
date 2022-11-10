@@ -20,7 +20,8 @@ import random
 if 'prefix' not in st.session_state:
     st.session_state.prefix = md5(str(localtime()).encode('utf-8')).hexdigest()
 
-#specifying directories
+#specifying and checking directories
+#specify the data directories and create them if not exists
 real_dir = os.path.join(setupBaseDir, "../data/single_table/real/")
 real_multi_dir = os.path.join(setupBaseDir, "../data/multi_table/real/")
 model_TVAE_dir = os.path.join(setupBaseDir, "../data/single_table/models/TVAE/")
@@ -34,6 +35,12 @@ synthetic_CTGAN_dir = os.path.join(setupBaseDir, "../data/single_table/synthetic
 synthetic_GaussianCopula_dir = os.path.join(setupBaseDir, "../data/single_table/synthetic/GaussianCopula/")
 synthetic_TabularPreset_dir = os.path.join(setupBaseDir, "../data/single_table/synthetic/TabularPreset/")
 
+data_dirs = [real_dir, real_multi_dir, model_TVAE_dir, model_CopulaGAN_dir, model_CTGAN_dir, model_GaussianCopula_dir, model_TabularPreset_dir,synthetic_TVAE_dir, synthetic_CopulaGAN_dir,synthetic_CTGAN_dir, synthetic_GaussianCopula_dir,synthetic_TabularPreset_dir  ]
+
+for dir in data_dirs:
+    if not os.path.exists(dir):
+        os.makedirs(dir)
+
 #check if files already exist
 synthetic_TVAE_path = synthetic_TVAE_dir+st.session_state.prefix+'.csv'
 synthetic_CopulaGAN_path = synthetic_CopulaGAN_dir+st.session_state.prefix+'.csv'
@@ -41,7 +48,7 @@ synthetic_CTGAN_path = synthetic_CTGAN_dir+st.session_state.prefix+'.csv'
 synthetic_TabularPreset_path = synthetic_TabularPreset_dir+st.session_state.prefix+'.csv'
 synthetic_GaussianCopula_path = synthetic_GaussianCopula_dir+st.session_state.prefix+'.csv'
 
-#check if files already exist
+#check if models already exist
 model_TVAE_path = model_TVAE_dir+st.session_state.prefix+'.pkl'
 model_CopulaGAN_path = model_CopulaGAN_dir+st.session_state.prefix+'.pkl'
 model_CTGAN_path = model_CTGAN_dir+st.session_state.prefix+'.pkl'
@@ -57,7 +64,7 @@ option3 = st.sidebar.selectbox('What type of data do you have?', ("singleCSVTabl
 st.write('Model ID:')
 st.write(st.session_state.prefix)
 
-tab1, tab2, tab3 = st.tabs(["Real Data", "Generate Data", "Evaluations"])
+tab1, tab2, tab3 = st.tabs(["Real Data", "Generate Data", "Distributions"])
 
 
 def file_exist(file_path) -> bool:
@@ -366,6 +373,9 @@ with tab3:
             ax.hist(np_CopulaGAN, bins=20)
             st.pyplot(fig)
         else:
-            st.write("Future implementation")
+            if option3=='MultiTable':
+                st.write("Future implementation")
+            else:
+                st.write('Upload and Generate data to proceed')
 
 
