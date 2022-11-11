@@ -16,9 +16,11 @@ import matplotlib.pyplot as plt
 import numpy as np
 import random
 
+
 #session state management
-if 'prefix' not in st.session_state:
-    st.session_state.prefix = md5(str(localtime()).encode('utf-8')).hexdigest()
+if 'key' not in st.session_state:
+    st.session_state.key = md5(str(localtime()).encode('utf-8')).hexdigest()
+    prefix = st.session_state.key
 
 #specifying and checking directories
 #specify the data directories and create them if not exists
@@ -61,8 +63,7 @@ st.write("""
 """)
 option3 = st.sidebar.selectbox('What type of data do you have?', ("singleCSVTable", "multipleCSVTables"))
 
-st.write('Model ID:')
-st.write(st.session_state.prefix+'.pkl')
+st.write('Model id:'+st.session_state.prefix+'.pkl')
 
 tab1, tab2 = st.tabs(["Real Data", "Generate Data"])
 
@@ -79,6 +80,7 @@ with tab1:
         col1, col2 = st.columns(2)
         with col1:
             
+            
             if uploaded_files is not None:
                 dataframe = pd.read_csv(uploaded_files)
 
@@ -90,8 +92,24 @@ with tab1:
 
                 #save real file
                 dataframe.to_csv(real_dir+st.session_state.prefix+'.csv', sep=',' )
-                st.write(real_dir+st.session_state.prefix+'.csv')
-                st.write(dataframe)
+                #st.write(real_dir+st.session_state.prefix+'.csv')
+                #st.write(dataframe)
+
+                #Data Evaluation
+                # Displaying the header and the first lines of the dataframe
+                st.write('The header and first lines of the dataset are: ')
+                st.dataframe(dataframe.head(10))
+
+
+                # Displaying the dataframe dimensions
+                dimensions = 'The dimensions of the dataset are ' + str(dataframe.shape[0]) + ' rows and ' + str(
+                    dataframe.shape[1]) + ' columns.'
+                st.write(dimensions)
+
+
+                # Displaying column names
+                columns_names = ', '.join(list(dataframe.columns))
+                st.write('The columns are: ' + columns_names + '.')
 
             with col2:
                 file = real_dir + st.session_state.prefix+'.csv'
@@ -152,7 +170,7 @@ with tab2:
                     if isExist == True:
                         os.remove(paths)
 
-                with st.spinner('Wait for it...'):
+                with st.spinner('Generating...'):
                     time.sleep(5)
 
                     df = pd.read_csv(file)

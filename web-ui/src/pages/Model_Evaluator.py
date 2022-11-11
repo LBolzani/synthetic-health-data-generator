@@ -1,5 +1,5 @@
 import streamlit as st
-
+from os import path
 import streamlit as st
 import os
 import pathlib
@@ -7,52 +7,25 @@ from os import listdir
 from os.path import isfile, join
 from sdv.tabular import GaussianCopula
 from sdv.evaluation import evaluate
+from table_evaluator import TableEvaluator
+import time
 
 #Performance imports
-from sdv import load_demo, SDV
-from sdv.tabular import CTGAN, CopulaGAN
-from sdv.evaluation import evaluate
-
-
-import pandas as pd
-import numpy as np
-import sys
-
-from sklearn.cluster import KMeans, FeatureAgglomeration
-
-from sklearn.decomposition import PCA, NMF, TruncatedSVD
-from sklearn.linear_model import LogisticRegression
-from sklearn.ensemble import RandomForestClassifier
 
 import seaborn as sns
 import matplotlib.pyplot as plt
 import matplotlib
 
-from scipy.stats import zscore
 
-font = {'size'   :      14}
-
-matplotlib.rc('font', **font)
-
-import matplotlib as mpl
-mpl.rcParams['figure.dpi'] = 100
-
-sns.set(rc={"figure.dpi":100, 'savefig.dpi':300})
-sns.set_theme(style='whitegrid')
-
-random_seed = 31415926
-
-np.random.seed(random_seed)
-
-import warnings
-warnings.simplefilter(action='ignore', category=FutureWarning)
-warnings.simplefilter(action="ignore", category=pd.errors.PerformanceWarning)
 
 #other imports
 import sys, os
 setupBaseDir = os.path.dirname(__file__)
 sys.path.insert(0, setupBaseDir)
 
+model_root = os.path.join(setupBaseDir, "../data/single_table/models/")
+real_data_root = os.path.join(setupBaseDir, "../data/single_table/real/")
+synthetic_data_root = os.path.join(setupBaseDir, "../data/single_table/synthetic/")
 real_dir = os.path.join(setupBaseDir, "../data/single_table/real/")
 real_multi_dir = os.path.join(setupBaseDir, "../data/multi_table/real/")
 model_TVAE_dir = os.path.join(setupBaseDir, "../data/single_table/models/TVAE/")
@@ -72,6 +45,11 @@ for dir in data_dirs:
     if not os.path.exists(dir):
         os.makedirs(dir)
 
+#globals
+option6 = []
+available_models = []
+model_list = ['TVAE', 'CopulaGAN', 'CTGAN', 'GaussianCopula','TabularPreset']
+
 st.write("""
 # SYNTHETIC MODEL EVALUATOR
 """)
@@ -81,32 +59,48 @@ model_path = model_TVAE_dir
 onlyfiles = [f for f in listdir(model_path) if isfile(join(model_path, f))]
 
     
-tab1, tab2, tab3 = st.tabs(['Performance','2','3'])
+tab1, tab2, tab3, tab4 = st.tabs(['Performance','Correlations','Cumulative Sums Per Feature', 'LogisticRegression'])
+data_type = st.sidebar.radio('Data Format', ('SingleTable', 'MultiTable'))
 with tab1:
-    data_type = st.sidebar.radio('Data Format', ('SingleTable', 'MultiTable'))
     if data_type == 'MultiTable':
         st.write('Future Implementation')
     else:
-        option6 = st.selectbox('Pick or paste your Model ID (hash) .pkl', onlyfiles)    
-        sample_size = st.number_input('Number of rows to evaluate with', 100)
-        if st.button('Evaluate'):
-            st.write('Why hello there')
-        
+         option6 = st.selectbox('Pick or paste your Model ID (hash) .pkl', onlyfiles)    
+         sample_size = st.number_input('Number of rows to evaluate with', 100)
+         if st.button('Evaluate'):
+            real_file = real_data_root+option6[:33]+'csv'
+            real_data = pd.read_csv(real_file)
+            #data = real_data.dropna(how='all', axis=1)
+            with st.spinner('Evaluating...'):
+                    time.sleep(5)
+            st.success('Done! Proceed to the next tabs to view')
+
+with tab2:
+    if data_type == 'MultiTable':
+        st.write('Future Implementation')
+    else:
+        col1,col2=st.columns(2)
+        with col1:
+            for model in model_list:
+                if path.isfile(model_root+model+'/'+option6):
+                    available_models.append(model)
+                    #st.write(model)
+
+            for model in available_models:
+                #Getting real and synthetic files as dfs and plotting them
+                synthetic_data = pd.read_csv(synthetic_data_root+model+'/'+option6[:33]+'csv')
+                st.write('Correlation plot for '+model+' synthetic data')
+                fig, ax = plt.subplots()
+                sns.heatmap(synthetic_data.corr(), ax=ax)
+                st.write(fig)
+        with col2:
+            st.write(option6)
+                
+
+
+            
 
 
 
 
 
-
-        #model = GaussianCopula.load(option6)
-
-#option1 = st.selectbox( 'What industry would you like to see data for?', ("Biology", "clinical_patient_histories"))
-#option7 = st.sidebar.selectbox('Model ID:', ("Biology", "clinical_patient_histories"))
-
-
-# st.selectbox(
-# if st.button('Run Model'):
-#     st.write('Why hello there')
-# file_location=model_path
-# st.write(file_location))
-# use `file_location` as a parameter to the main script
