@@ -14,6 +14,7 @@ from sdv.evaluation import evaluate
 import pandas as pd
 import warnings
 import operator
+from synth_generator.algorithms import arguments
 
 class ComparisonModels:
     def __init__(self, original_data, algorithm, par):
@@ -42,7 +43,6 @@ class ComparisonModels:
 
     def InvestigateModels(self):
         algo = [CTGAN(), CopulaGAN(), GaussianCopula(), TVAE()]
-        arguments = ['gaussian', 'gamma', 'beta', 'student_t', 'gaussian_kde', 'truncated_gaussian']
         col = list(self.original_data.columns)
         param = []
         for i in arguments:
