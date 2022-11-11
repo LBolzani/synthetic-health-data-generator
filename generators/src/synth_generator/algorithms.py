@@ -3,12 +3,9 @@ from sdv.tabular import CopulaGAN
 from sdv.tabular import GaussianCopula
 from sdv.tabular import TVAE
 
-ctan = 'CTGAN'
-copulaGan = 'CopulaGAN'
-gaussianCopula = 'GaussianCopula'
-tvae = 'TVAE'
+algos = {'CTGAN': CTGAN(),
+         'CopulaGAN': CopulaGAN() ,
+         'GaussianCopula': GaussianCopula(),
+         'TVAE': TVAE()}
 
-algos = {ctan: CTGAN(),
-         copulaGan: CopulaGAN() ,
-         gaussianCopula: GaussianCopula(),
-         tvae: TVAE()}
+arguments = ['gaussian', 'gamma', 'beta', 'student_t', 'gaussian_kde', 'truncated_gaussian']

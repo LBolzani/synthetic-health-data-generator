@@ -3,7 +3,7 @@ import streamlit as st
 import constants.evaluatorsFnsName as evalFN
 
 from s_evaluator.evaluator import Evaluator
-from synth_generator.algorithms import ctan, copulaGan, gaussianCopula, tvae, algos
+from synth_generator.algorithms import algos, arguments
 from synth_generator.ComparisonModels import ComparisonModels
 
 st.set_page_config(layout="wide")
@@ -32,17 +32,16 @@ with col1:
     st.subheader("Settings")
     st.file_uploader("Upload data:", key='upload_file')
 
-    st.selectbox('Algorithm:',(ctan, copulaGan, gaussianCopula,tvae), key= 'algorithm_gen')
-    st.selectbox('Parameters:', ('gaussian', 'gamma', 'beta', 'student_t', 'gaussian_kde', 'truncated_gaussian'), key= 'param_gen')
+    st.selectbox('Algorithm:',[algo for algo in algos.keys()], key= 'algorithm_gen')
+    st.selectbox('Parameters:', [arg for arg in arguments], key= 'param_gen')
 
     if st.session_state.upload_file is not None:
         df_real_data = load_data(st.session_state.upload_file)
         st.selectbox('Output variable:', [col for col in df_real_data.columns], key='output_var')
 
-
-    st.radio('Evaluators:', (evalFN.PCA, evalFN.SVD, evalFN.RANDOM_FOREST,
-                                evalFN.LINEAR_REG, evalFN.REAL_VS_SYNTH),
-                               key='algo_eval')
+    st.radio('Evaluators:',
+             (evalFN.PCA, evalFN.SVD, evalFN.RANDOM_FOREST, evalFN.LINEAR_REG, evalFN.REAL_VS_SYNTH),
+             key='algo_eval')
 
     st.markdown("<hr>", unsafe_allow_html=True)
 
@@ -68,8 +67,8 @@ with col2:
                 st.write("Score: {}".format(score))
                 st.dataframe(df_synth_data)
                 st.download_button(
-                    label = "Download CSV",
-                    data = convert_df(df_synth_data),
+                    label="Download CSV",
+                    data=convert_df(df_synth_data),
                     file_name='.csv',
                     mime='text/csv',
                 )
