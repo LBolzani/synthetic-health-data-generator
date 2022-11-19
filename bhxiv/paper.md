@@ -92,7 +92,7 @@ We generated some synthetic datasets that we described using machine-readable me
 ### Metadata model
 Having in mind the provision of synthetic datasets reusable for the community and by machines, i.e. FAIR data, we modelled a minimal metadata model.
 
-#### BioSchemas
+#### Bioschemas
 
 ### Repository for deposition
 
