@@ -71,7 +71,9 @@ Our main goal was to provide to the health community and life sciences researche
 ### Synthetic Data Generation workflows
 To develop an infrastructure for generating synthetic health data that is easy to use, we first explored how to generate synthetic health data from real data. There are many existing methods to generate synthetic data. The first challenge is that these methods are usually tailored for a specific type and format of the input dataset. The second challenge is to evaluate the quality of the generated synthetic dataset to know whether the model and the data are actually useful.
 
-We first defined an input data type which was _tabular data_ for its simplicity. Then we chose a starting dataset that was already published in the public domain.
+We first defined an input data type which was _tabular data_ for its simplicity. Then, we chose a starting dataset that was already published in the public domain. We selected the [Breast Cancer Wisconsin (Diagnostic) Data set](https://www.kaggle.com/datasets/uciml/breast-cancer-wisconsin-data) published in the Kaggle website rated with a usability of $8.53$. This dataset contains 32 columns including 2 attributes (identifier _ID_ (integer) and _Diagnosis_ (M=malignant, B=benign)) and 10 real-valued features computed for each cell nucleus from a digitized image of a breast mass in addition of three statistical parameters for each feature (_Mean_, _standard error_ and _worst_). They describe characteristics of the cell nuclei present in the image [@bennett1992]. This dataset is similar to those for clinical research making it suitable to produce synthetic data for health.
+
+We experimented with three synthetic data generators: SDV, DataSynthesizer and Synthea.  
 
 ### Quality assessment
 
@@ -99,7 +101,7 @@ Our overarching goal of developing an infrastructure prototype for the generatio
 
 1. Addition of documentation;
 2. Inclusion of more datatypes and Workflows;
-3. Mapping the metadata model to the EDAM ontology and BioSchemas;
+3. Mapping the metadata model to the EDAM ontology and BioSchemas, and align to the DOME recommendations;
 4. Request a _synthetic data_ metadata profile to the BioStudies repository;
 5. Description of the synthetic datasets and its workflow generation as RO-Crate/CWL digital objects;
 6. Implement as a Python Package.
