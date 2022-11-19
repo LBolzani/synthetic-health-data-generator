@@ -13,13 +13,16 @@ authors:
   - name: Soumyabrata Ghosh
     orcid: 0000-0003-0659-6733
     affiliation: 2
+  - name: Muhammad Shoaib
+    orcid: 0000-0002-4854-4635
+    affiliation: 2
   - name:
     orcid:
     affiliation:
 affiliations:
   - name: Human Genetics, Leiden University Medical Center, Leiden, Netherlands
     index: 1
-  - name: Luxembourg Centre for Systems Biomedicine, University of Luxembourg, Luxembourg, Luxembourg
+  - name: Luxembourg Centre for Systems Biomedicine, University of Luxembourg, Luxembourg
     index: 2
   - name:
     index:
