@@ -16,7 +16,7 @@ authors:
 affiliations:
   - name: Human Genetics, Leiden University Medical Center, Leiden, Netherlands
     index: 1
-  - name: Luxembourg Centre for Systems Biomedicine, University of Luxembourg, Luxembourg
+  - name: Luxembourg Center for Systems Biomedicine, University of Luxembourg, Luxembourg
     index: 2
 date: 11 November 2022
 cito-bibliography: paper.bib
