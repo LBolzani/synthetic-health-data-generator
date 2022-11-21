@@ -1,10 +1,9 @@
 import pandas as pd
 import streamlit as st
 import constants.evaluatorsFnsName as evalFN
-
-from s_evaluator.evaluator import Evaluator
-from synth_generator.algorithms import algos, arguments
-from synth_generator.ComparisonModels import ComparisonModels
+import evaluators.s_evaluator.evaluator as eval_model
+import synth_generators.algorithms as algs
+import synth_generators.ComparisonModels as cmp_model
 
 st.set_page_config(layout="wide")
 st.markdown("<h1 style='text-align: center; margin-bottom: 10px;margin-top: 10px;'>Synthetic data generator tool</h1>",
@@ -21,7 +20,7 @@ def load_data(uploaded_file):
 
 @st.cache
 def compute_syntData(df_real_data, algorithm, parameters):
-    compareModel = ComparisonModels(df_real_data, algos[algorithm], parameters)
+    compareModel = cmp_model.ComparisonModels(df_real_data, algs.algos[algorithm], parameters)
     return compareModel.GenerateSynth(parameters)
 
 @st.cache
@@ -32,8 +31,8 @@ with col1:
     st.subheader("Settings")
     st.file_uploader("Upload data:", key='upload_file')
 
-    st.selectbox('Algorithm:',[algo for algo in algos.keys()], key= 'algorithm_gen')
-    st.selectbox('Parameters:', [arg for arg in arguments], key= 'param_gen')
+    st.selectbox('Algorithm:', [algo for algo in algs.algos.keys()], key='algorithm_gen')
+    st.selectbox('Parameters:', [arg for arg in algs.arguments], key='param_gen')
 
     if st.session_state.upload_file is not None:
         df_real_data = load_data(st.session_state.upload_file)
@@ -78,7 +77,7 @@ with col2:
     with tab2:
         if st.session_state.upload_file is not None and st.session_state.gen_synth_data:
             output = st.session_state.output_var
-            evaluator = Evaluator(df_real_data, df_synth_data, df_real_data[output])
+            evaluator = eval_model.Evaluator(df_real_data, df_synth_data, df_real_data[output])
             evaluator.preprocess()
             evaluator.do_clustering()
             if st.session_state.algo_eval == evalFN.PCA:
