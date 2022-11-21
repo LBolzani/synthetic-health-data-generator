@@ -1,6 +1,6 @@
-from s_evaluator.preprocessing import *
-from s_evaluator.rf_visual_evaluator import *
-from s_evaluator.ploting import *
+from evaluators.s_evaluator.preprocessing import *
+from evaluators.s_evaluator.rf_visual_evaluator import *
+from evaluators.s_evaluator.ploting import *
 
 from sklearn.decomposition import PCA
 from sklearn.decomposition import TruncatedSVD

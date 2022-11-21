@@ -1,4 +1,4 @@
-from s_evaluator import evaluator
+from evaluators.s_evaluator import evaluator
 import pandas as pd
 import streamlit as st
 
@@ -9,7 +9,7 @@ import os
 st.set_page_config(layout="wide")
 st.markdown("<h1 style='text-align: center;'>Synthetic data tool</h1>", unsafe_allow_html=True)
 
-base_file = os.path.join(os.path.dirname(__file__), '../../evaluators/')
+base_file = os.path.join(os.path.dirname(__file__), '/')
 
 
 df_real_data = pd.read_csv(base_file + "test/resources/data/breast_cancer_df.csv")

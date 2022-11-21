@@ -14,7 +14,7 @@ from sdv.evaluation import evaluate
 import pandas as pd
 import warnings
 import operator
-from synth_generator.algorithms import arguments
+import synth_generators.algorithms as algs
 
 class ComparisonModels:
     def __init__(self, original_data, algorithm, par):
@@ -45,7 +45,7 @@ class ComparisonModels:
         algo = [CTGAN(), CopulaGAN(), GaussianCopula(), TVAE()]
         col = list(self.original_data.columns)
         param = []
-        for i in arguments:
+        for i in algs.arguments:
             temp_dic = dict()
             for j in col:
                 temp_dic[j] = i
