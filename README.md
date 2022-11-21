@@ -14,7 +14,6 @@ The project is organized in different folders:
   * After running the docker commands depicted abow, the application should be browsed at this address: `http://0.0.0.0:8501 `
 
 
-* For developers, here below the main libraries used to develop the application:
+* For developers, here below the main libraries used to develop the application, for details please refer to their own documentation:
   * [Streamlit](https://streamlit.io/) used for ui development
   * [SDV](https://sdv.dev/) used for synthetic data generation
-  <br> (For details please refer to the documentation libraries)
