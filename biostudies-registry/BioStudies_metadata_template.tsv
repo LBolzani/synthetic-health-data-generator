@@ -1,0 +1,41 @@
+Submission	
+Title	Title_of_Dataset
+	
+Study	$$$1
+Description	"In vivo Rat, Left Vertricular Pressure Dual Pressure Project. Time series data over 5 days at 1 second intervals."
+Work Package and Organ	WP7 Heart
+Compound	HYDROCHLOROTHIAZIDE
+ChEMBL_ID	CHEMBL435
+Assay type	in vivo
+Organism	Rat
+Parameter	LVEDP
+Parameter	HR
+Parameter	dPdt
+Parameter	Sys
+Parameter	Dia
+Parameter	MAP
+Parameter	PH
+Length of assay	5 days
+Interval between measurements	1 second
+
+File	totoro.jpg
+Description	"LVEDP, HR, dPdt data"
+	
+File	totoro.jpg
+Description	"Sys, Dia data"
+	
+File	totoro.jpg
+Description	"MAP, PH data"
+	
+Author	
+<affiliation>	ref1
+Name	Sam Smith
+E-mail	sam.smith@transqst
+	
+Author	
+<affiliation>	ref1
+Name	A.N. Other
+E-mail	A.N.Other@transqst.org
+	
+Organization	ref1
+Name	An EFPIA company

@@ -1,0 +1,22 @@
+Descriptor	Semantic group	Definition	MoSCoW	Example: https://www.kaggle.com/datasets/uciml/breast-cancer-wisconsin-data	Ontology	Ontology term	Comment
+Domain	Dataset		M	Cancer, healthcare	EDAM		
+Data type	Dataset		M	Tabular, digitized image	EDAM		if not in EDAM then EFO
+Application or task	Dataset		M	Prediction of malignancy	STATO		Ask to add ML into STATO to Philippe
+License	Dataset		M	https://creativecommons.org/licenses/by-nc-sa/4.0/	DUO		
+Generation method	Tool		M	NA	STATO		Ask to add ML into STATO to Philippe
+Author ORCID	Attribution		M	NA			
+DOI 	Dataset		S	NA			
+Dataset name	Dataset		S	Breast Cancer Wisconsin (Diagnostic) Data Set			
+Dataset description	Dataset		S	Predict whether the cancer is benign or malignant			
+Publication year	Dataset		S	2022			
+Species	Dataset		S	Human	NCBITaxon		
+Sample size	Dataset		S	10.000	OBO		EFO
+Instance type	Dataset		S	cell nuclei 	OBO		EFO
+Number of attributes	Dataset		S	32	OBO		EFO
+File type (format)	Dataset		S	CSV	EDAM		
+Paper ID 	Dataset		C	NA			
+Tool/Code ID	Tool		C	https://www.kaggle.com/code/berkemk/breast-cancer-prediction-svc			
+Language	Dataset		C	English			
+Technology or assay type	Provenance		C	Affymetrix			
+Attribute type	Dataset		C	Mixed: numerical and categorical	OBO		EFO
+Number of missing values	Dataset		C	None	OBO		EFO
