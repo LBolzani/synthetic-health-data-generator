@@ -1,0 +1,56 @@
+[
+{
+    "domain":[
+        {
+            "id":"http://edamontology.org/topic_2640",
+            "label":"Oncology"
+        }
+    ],
+    "dataType":[
+        {
+            "id":"http://edamontology.org/data_3558",
+            "label":"Clinical trial report"
+        }
+    ],
+    "fileType":[
+        {
+            "id":"http://edamontology.org/format_3752",
+            "label":"CSV"
+        }
+    ],
+    "application":{
+        "id":"http://purl.obolibrary.org/obo/STATO_0000481",
+        "label":"genomic best linear unbiased prediction"
+    },
+    "license":"https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "policies":["DUO:0000006"],
+    "generationMethod":{
+        "id":"NA",
+        "label":"NA"
+    },
+    "credits":[
+        {
+            "ORCID":"XXXX-XXXX-XXXX-XXXX",
+            "name": "XXXXX",
+            "type": "Person/Institution"
+        }
+    ],
+    "DOI":"NA",
+    "datasetName": "Breast Cancer Wisconsin (Diagnostic) Data Set",
+    "datasetDescription":"Predict whether the cancer is benign or malignant",
+    "publicationYear": 2022,
+    "species":{
+        "id":"9606",
+        "label":"Homo sapiens"
+    },
+    "sampleSize": 10000,
+    "instanceType": "cell nuclei",
+    "numberAttributes": 32,
+    "paperId":"NA",
+    "tool": "https://www.kaggle.com/code/berkemk/breast-cancer-prediction-svc",
+    "language": "English",
+    "technology": ["Affymetrix"],
+    "attributeType": "Mixed: numerical and categorical",
+    "missingValues": "None"
+}
+]
