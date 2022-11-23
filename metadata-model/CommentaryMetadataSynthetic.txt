@@ -1,0 +1,15 @@
+# Comments conversion metatadata_model.tsv - metadataTemplate.json
+
+Domain: Add EDAM topic id and label. The are not terms like cancer or healthcare, but more specific terms like Oncology.
+DataType: Add EDAM data id and label.
+Application or task: Change name to application. Add id and label of STATO. I don't know how it works stato but I can't find the "Prediction of malignancy" term. So I have written the first one that I have found (http://purl.obolibrary.org/obo/STATO_0000481).
+License: License of the data. OpenAccess, etc.
+Policies: I've added this term. There is a difference between the DUO codes (Ex: Data use permission to health or biomedical research) and Licenses (Ex: MIT or GNU GPLv3).
+Generation Method: Add id and label. NA as do not know what to put in STATO.
+Author ORCID: Change variable to "Credits". This variable credits is copied from the metadata of OpenEBench. The subvariables are ORCID, name and Type, where type refers as if the people that do the upload are doing it by themselves or by their institution.
+Species: Add id and label from Ncbi Taxonomy.
+Sample size: I haven't found the OBO ontology 
+File Type: I have locate it with the other EDAM variables.
+Paper ID: Do not know what it means.
+Technology: As list because there can be more than one.
+
