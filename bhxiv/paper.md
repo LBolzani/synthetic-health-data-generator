@@ -85,7 +85,7 @@ We generated some synthetic datasets that we described using machine-readable me
 Having in mind the provision of synthetic datasets reusable for the community and by machines, i.e. FAIR data, we modelled a minimal metadata model.
 
 #### Bioschemas
-Bioschemas profiles are suggested implementations of Schema.org types and define a community-standardized subset of properties and constraints relevant to the life sciences. To further improve FAIRness of the synthetic datasets, we mapped properties in our metadata model to the Bioschemas Dataset profile. 
+Bioschemas profiles are community-standardized recommendations on the application of Schema.org types and define a subset of properties and constraints relevant to the life sciences. To further improve FAIRness of the synthetic datasets, we mapped properties in our metadata model to the Bioschemas Dataset profile. 
 
 ### Repository for deposition
 
