@@ -9,7 +9,8 @@ DOI 	Dataset		S	NA      An identifier (not necessarily DOI) is a Must/Minimal pr
 Dataset name	Dataset		S	Breast Cancer Wisconsin (Diagnostic) Data Set     The name of the dataset is a Must/Minimal property for Bioschemas
 Dataset description	Dataset		S	Predict whether the cancer is benign or malignant     The description of the dataset is a Must/Minimal property for Bioschemas
 Publication year	Dataset		S	2022			
-Species	Dataset		S	Human	NCBITaxon		
+Species	Dataset		S	Human	NCBITaxon
+Sex	Dataset		S	Human	PATO			
 Sample size	Dataset		S	10.000	OBO		EFO
 Instance type	Dataset		S	cell nuclei 	OBO		EFO
 Number of attributes	Dataset		S	32	OBO		EFO
