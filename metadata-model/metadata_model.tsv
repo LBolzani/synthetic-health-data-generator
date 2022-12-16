@@ -1,23 +1,23 @@
-Descriptor	Semantic group	Definition	MoSCoW	Example: https://www.kaggle.com/datasets/uciml/breast-cancer-wisconsin-data	Ontology	Ontology term	Comment
-Domain	Dataset		M	Cancer, healthcare	EDAM		
-Data type	Dataset		M	Tabular, digitized image	EDAM		if not in EDAM then EFO
-Application or task	Dataset		M	Prediction of malignancy	STATO		Ask to add ML into STATO to Philippe
-License	Dataset		M	https://creativecommons.org/licenses/by-nc-sa/4.0/	DUO		
-Generation method	Tool		M	NA	STATO		Ask to add ML into STATO to Philippe
-Author ORCID	Attribution		M	NA			
-DOI 	Dataset		S	NA      An identifier (not necessarily DOI) is a Must/Minimal property for Bioschemas
-Dataset name	Dataset		S	Breast Cancer Wisconsin (Diagnostic) Data Set     The name of the dataset is a Must/Minimal property for Bioschemas
-Dataset description	Dataset		S	Predict whether the cancer is benign or malignant     The description of the dataset is a Must/Minimal property for Bioschemas
-Publication year	Dataset		S	2022			
-Species	Dataset		S	Human	NCBITaxon
-Sex	Dataset		S	Human	PATO			
-Sample size	Dataset		S	10.000	OBO		EFO
-Instance type	Dataset		S	cell nuclei 	OBO		EFO
-Number of attributes	Dataset		S	32	OBO		EFO
-File type (format)	Dataset		S	CSV	EDAM		
-Paper ID 	Dataset		C	NA			
-Tool/Code ID	Tool		C	https://www.kaggle.com/code/berkemk/breast-cancer-prediction-svc			
-Language	Dataset		C	English			
-Technology or assay type	Provenance		C	Affymetrix			
-Attribute type	Dataset		C	Mixed: numerical and categorical	OBO		EFO
-Number of missing values	Dataset		C	None	OBO		EFO
+Descriptor	Semantic group	Definition	MoSCoW	Examples	Ontology	Ontology term	Comment	EDAM term (for the values)	EDAM IRI	EDAM comments (see also comments in cells)
+Domain	Dataset		M	Cancer, healthcare	EDAM			topic	http://edamontology.org/topic_0003	general EDAM concepts, certain terms can be added in combination to include the semantic expressivity needed
+Data type	Dataset		M	Tabular, digitized image	EDAM		if not in EDAM then EFO	data	http://edamontology.org/data_0006	
+Application or task	Dataset		M	Prediction of malignancy	STATO		Ask to add ML into STATO to Philippe	operation	http://edamontology.org/operation_0004	
+License	Dataset		M	https://creativecommons.org/licenses/by-nc-sa/4.0/	DUO		important to distinguish between the license of the tool/workflow that generated the data, from any license or conditions of use of the data itself	just use the license URL		in principle license are linked to creative work only, it is not clear if this applies to (ML) generated data. https://spdx.org/licenses/
+Generation method	Tool		M	NA	STATO		Ask to add ML into STATO to Philippe	statistics and probability	http://edamontology.org/topic_2269	see e.g. http://edamontology.org/operation_3481
+Author ORCID	Attribution		M	NA				person_id; organization_id	http://edamontology.org/data_2118	at least one of these general concepts
+DOI	Dataset		S	NA      An identifier (not necessarily DOI) is a Must/Minimal property for Bioschemas			change to just ID (make it ideally a permanent identifier as DOI)	identifier	http://edamontology.org/data_0842	
+Dataset name	Dataset		S	Breast Cancer Wisconsin (Diagnostic) Data Set     The name of the dataset is a Must/Minimal property for Bioschemas				name	http://edamontology.org/data_2099	
+Dataset description	Dataset		S	Predict whether the cancer is benign or malignant     The description of the dataset is a Must/Minimal property for Bioschemas				description	http://edamontology.org/data_3671	
+Publication year	Dataset		S	2022			should probably match a bibliographic field in PubMed (e.g. pubYear or dateOfCreation or firstPublicationDate)	publication year	xsd:dateTime or http://purl.obolibrary.org/obo/MI_0886	sw standard vocabulary
+Species	Dataset		S	Human	NCBITaxon			organism identifier	http://edamontology.org/data_1869	
+Sex	Dataset		S	Human	PATO		change sex for biological_sex	biological sex	http://purl.obolibrary.org/obo/PATO_0000047	suggest a new field for 'gender'
+Sample size	Dataset		S	10.000	OBO		EFO		potential addition to EDAM	
+Instance type	Dataset		S	cell nuclei	OBO		EFO; change to subject?	subject	http://purl.org/dc/elements/1.1/subject	
+Number of attributes	Dataset		S	32	OBO		EFO		potential addition to EDAM	
+File type (format)	Dataset		S	CSV	EDAM		(more than one possible, for the same data type)	format	http://edamontology.org/format_1915	
+Publication ID	Dataset		C	NA				article ID?	http://edamontology.org/data_1088	
+Tool/Code ID	Tool		C	https://www.kaggle.com/code/berkemk/breast-cancer-prediction-svc; biotools:odm-clinical-data-generator				just use the link to the code/tool	http://edamontology.org/data_0977	
+Language	Dataset		C	English					xml:lang	
+Technology or assay type	Provenance		C	Affymetrix					http://edamontology.org/topic_3361	
+Attribute type	Dataset		C	Mixed: numerical and categorical	OBO		EFO; change to attributes or maybe better features?		potential addition to EDAM	
+Number of missing values	Dataset		C	None	OBO		EFO. Fraction (percentage) of missing values may be more important in practise, but can of course be derived from the number of values and number of missing values.		potential consideration if this could somehow fit to EDAM. Related to Imputation?/Extrapolation?	

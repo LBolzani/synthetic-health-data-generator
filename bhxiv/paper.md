@@ -82,7 +82,7 @@ We experimented with three synthetic data generators: SDV, DataSynthesizer and S
 We generated some synthetic datasets that we described using machine-readable metadata and uploaded in BioStudies repository. In the following sections we describe the metadata model and the criteria used to select an appropriate repository for deposition.
 
 ### Metadata model
-Having in mind the provision of synthetic datasets reusable for the community and by machines, i.e. FAIR data, we modelled a minimal metadata model.
+Having in mind the provision of synthetic datasets reusable for the community and by machines, i.e. FAIR data, we modelled a minimal metadata model. This metadata model is publicly available on [GitHub repository](https://github.com/LBolzani/synthetic-health-data-generator/tree/main/metadata-model) and it is meant primarily for findability of synthetic datasets in public repositories. It is composed of 22 descriptors that describe the dataset, the generation tool, attribution and provenance. We ranked these descriptors following the MoSCoW criteria, where we defined 7 must have descriptors. Thanks to the BioHackathon, we aligned with EDAM developers who were also attending and mapped to EDAM terms the model data values. The model is available as TSV and JSON distributions.
 
 #### Bioschemas
 
