@@ -1,4 +1,4 @@
-﻿Descriptor	Semantic group	Definition	MoSCoW	Examples	Ontology	Ontology term	Comment	EDAM term (for the values)	EDAM IRI	EDAM comments (see also comments in cells)
+Descriptor	Semantic group	Definition	MoSCoW	Examples	Ontology	Ontology term	Comment	EDAM term (for the values)	EDAM IRI	EDAM comments (see also comments in cells)
 Domain	Dataset		M	Cancer, healthcare	EDAM			topic	http://edamontology.org/topic_0003	general EDAM concepts, certain terms can be added in combination to include the semantic expressivity needed
 Data type	Dataset		M	Tabular, digitized image	EDAM		if not in EDAM then EFO	data	http://edamontology.org/data_0006	
 Application or task	Dataset		M	Prediction of malignancy	STATO		Ask to add ML into STATO to Philippe	operation	http://edamontology.org/operation_0004	
