@@ -11,7 +11,7 @@ Dataset description	Dataset		S	Predict whether the cancer is benign or malignant
 Publication year	Dataset		S	2022			should probably match a bibliographic field in PubMed (e.g. pubYear or dateOfCreation or firstPublicationDate)	publication year	xsd:dateTime or http://purl.obolibrary.org/obo/MI_0886	sw standard vocabulary
 Species	Dataset		S	Human	NCBITaxon			organism identifier	http://edamontology.org/data_1869	
 Sex	Dataset		S	Human	PATO		change sex for biological_sex	biological sex	http://purl.obolibrary.org/obo/PATO_0000047	suggest a new field for 'gender'
-Age	Dataset		S	Human	PATO		time which has passed since birth	http://purl.obolibrary.org/obo/PATO_0000011	This is a tricky one. Should it be expressed in years? are decimals allowed? what about age ranges or categorizations such as "young adult" or "infant"?
+Age	Dataset		S	Human	PATO		time which has passed since birth	http://purl.obolibrary.org/obo/PATO_0000011	This is a tricky one. Should it be expressed in years? are decimals allowed? what about age ranges or categorizations such as 'young adult' or 'infant'?
 Sample size	Dataset		S	10.000	OBO		EFO		potential addition to EDAM	
 Instance type	Dataset		S	cell nuclei	OBO		EFO; change to subject?	subject	http://purl.org/dc/elements/1.1/subject	
 Number of attributes	Dataset		S	32	OBO		EFO		potential addition to EDAM	
