@@ -15,7 +15,13 @@ authors:
     affiliation: 2
   - name: Sergi Aguiló-Castillo
     orcid: 0000-0003-0830-5733
-    affiliation: 3    
+    affiliation: 3 
+  - name: Ginger Tsueng
+    orcid: 0000-0000-0000-0000
+    affiliation: 4
+  - name: Leyla Jael Castro
+    orcid: 0000-0003-3986-0510
+    affiliation: 5       
 affiliations:
   - name: Human Genetics, Leiden University Medical Center, Leiden, Netherlands
     index: 1
@@ -23,6 +29,10 @@ affiliations:
     index: 2
   - name: Barcelona Supercomputing Center, Barcelona, Spain
     index: 3
+  - name: TBA
+    index: 4
+  - name: ZB MED Information Centre for Life Sciences 
+    index: 5  
 date: 11 November 2022
 cito-bibliography: paper.bib
 event: BioHackEU22
@@ -50,22 +60,22 @@ pasting above link (or yours) in
 -->
 
 # Introduction
-Machine Learning (ML) methods are becoming ever more prevalent across all domains in Life Sciences. However, a key component of effective ML is the availability of large datasets that are diverse and representative. In the context of health systems, with significant heterogeneity of clinical phenotypes and diversity of healthcare systems, there exists a necessity to develop and refine unbiased and fair ML models. Synthetic data are increasingly being used to protect the patient’s right to privacy and overcome the paucity of annotated open-access medical data. Synthetic data and generative models can address these challenges while advancing the use of ML in healthcare and research.
+Machine Learning (ML) methods are becoming ever more prevalent across all domains in Life Sciences. However, a key component of effective ML is the availability of large datasets that are diverse and representative and well-described so they can be used in training activities. In the context of health systems, with significant heterogeneity of clinical phenotypes and diversity of healthcare systems, there exists a necessity to develop and refine unbiased and fair ML models. Synthetic data are increasingly being used to protect the patient’s right to privacy and overcome the paucity of annotated open-access medical data. Synthetic data and generative models can address these challenges while advancing the use of ML in healthcare and research.
 
-Following up the efforts currently undertaken in the ELIXIR Health Data and the Machine Learning Focus Groups around the synthetic health data landscape, this project will focus on the health data providers' need for a ready-to-use synthetic data platform which is assessed by health data experts, researchers, and ML specialists. Aligned to ELIXIR Health Data Focus Group’s objectives, we aim at building an infrastructure for synthetic health data offering a dockerized synthetic data generator based on the open-source libraries Synthetic Data Vault (SDV) (github.com/sdv-dev) and ydata-synthetic (github.com/ydataai) with state of the art ML methods. This will enable users to generate synthetic data that has the same structure and statistical properties as the original dataset from a variety of data types (clinical, variational or omics). Despite the capacity to generate their own datasets, a set of exemplary datasets will be publicly available in appropriate repositories and will include rich metadata descriptions according to the DOME recommendations (https://dome-ml.org/) and GA4GH (ga4gh.org) standards. OpenEBench (openebench.bsc.es) will host a community of practice for comparing different approaches for synthetic data generation. Here, we present our prototype for the generation of synthetic health data and our proposed FAIR implementation of the generated synthetic datasets developed after one week of BioHacking together 20 participants (10 new to the project), from different countries (NL, ES, LU, UK, GR, FL, DE).
+Following up the efforts currently undertaken in the ELIXIR Health Data and the Machine Learning Focus Groups around the synthetic health data landscape, this project will focus on the health data providers' need for a ready-to-use synthetic data platform which is assessed by health data experts, researchers, and ML specialists. Aligned to ELIXIR Health Data Focus Group’s objectives, we aim at building an infrastructure for synthetic health data offering a dockerized synthetic data generator based on the open-source libraries Synthetic Data Vault (SDV) (github.com/sdv-dev) and ydata-synthetic (github.com/ydataai) with state of the art ML methods. This will enable users to generate synthetic data that has the same structure and statistical properties as the original dataset from a variety of data types (clinical, variational or omics). Despite the capacity to generate their own datasets, a set of exemplary datasets will be publicly available in appropriate repositories and will include rich metadata descriptions according to the DOME recommendations (https://dome-ml.org/) and GA4GH (ga4gh.org) standards. OpenEBench (openebench.bsc.es) will host a community of practice for comparing different approaches for synthetic data generation. Here, we present our prototype for the generation of synthetic health data and our proposed FAIR implementation of the generated synthetic datasets developed after one week of BioHacking together with 20 participants (10 new to the project), from different countries (NL, ES, LU, UK, GR, FL, DE).
 
 <!--
 # Results
 -->
 
 ## Infrastructure for Synthetic Health Data
-For stress and test development of new ML code, we need suitable data to properly demonstrate the tools application. However, ML developers without data access are not able to see how the tool performs for its intended application. One way to enable this is to generate _synthetic data_, where new "fake" data is generated from real data using a specifically designed model. Importantly, the generation model must maintain the original features and structure to be as realistic as possible to the original data. In particular, synthetic data goals are to ensure:
+For stress and test development of new ML code, we need suitable data to properly demonstrate the tools application. However, ML developers without access to private patient data are not able to train a model under realistic conditions and see how the tool performs for its intended application. One way to enable this is to generate _synthetic data_, where new "fake" data is generated from real data using a specifically designed model. Importantly, the generation model must maintain the original features and structure to be as realistic as possible wrt the original data. In particular, synthetic data goals are to ensure:
 
 1. applicability: the synthetic data must fit for its intended application.
 2. quality: it must be a sufficient and necessary representation of the real data.
 3. privacy: it must not expose any sensitive private information from the real data, e.g. we must prevent that a generated synthetic patient is actually real.
 
-Our main goal was to provide to the health community and life sciences researchers with a simple and reusable way of generating privacy-preserving and effective synthetic data to be used in artificial intelligence technologies and ML methods to speed up research on health data. Next, we present the workflows we developed to generate synthetic health data, how the data could be evaluated, the user interfaces to interact with the whole process, and how to make the synthetic datasets FAIR for others to reuse.
+Our main goal is to provide to the health community and life sciences researchers with a simple and reusable way of generating privacy-preserving and effective synthetic data to be used in artificial intelligence technologies and ML methods to speed up research on health data. Next, we present the workflows we developed to generate synthetic health data, how the data could be evaluated, the user interfaces to interact with the whole process, and how to make the synthetic datasets FAIR for others to reuse.
 
 
 ### Synthetic Data Generation workflows
@@ -155,12 +165,27 @@ As depicted in Figure 2, for both real and synthetic dataset, there were no sign
 
 
 ## FAIR Synthetic Datasets
-We generated some synthetic datasets that we described using machine-readable metadata and uploaded in BioStudies repository. In the following sections we describe the metadata model and the criteria used to select an appropriate repository for deposition.
+We generated some synthetic datasets that we described using machine-readable metadata and uploaded them to the BioStudies repository. In the following sections we describe the metadata model and the criteria used to select an appropriate repository for deposition.
 
 ### Metadata model
-Having in mind the provision of synthetic datasets reusable for the community and by machines, i.e. FAIR data, we modelled a minimal metadata model. This metadata model is publicly available on [GitHub repository](https://github.com/LBolzani/synthetic-health-data-generator/tree/main/metadata-model) and it is meant primarily for findability of synthetic datasets in public repositories. It is composed of 22 descriptors that describe the dataset, the generation tool, attribution and provenance. We ranked these descriptors following the MoSCoW criteria, where we defined 7 must have descriptors. Thanks to the BioHackathon, we aligned with EDAM developers who were also attending and mapped to EDAM terms the model data values. The model is available as TSV and JSON distributions.
+Having in mind the provision of synthetic datasets reusable for the community and by machines, i.e. FAIR data, we modelled a minimal metadata model. This metadata model is publicly available on [GitHub repository](https://github.com/LBolzani/synthetic-health-data-generator/tree/main/metadata-model) and it is meant primarily for findability of synthetic datasets in public repositories. It is composed of 22 descriptors that describe the dataset, the generation tool, attribution and provenance. We ranked these descriptors following the MoSCoW criteria, where we defined 7 must have descriptors. Thanks to the BioHackathon, we aligned with EDAM developers who were also attending and mapped the model data values to EDAM terms. The model is available as TSV and JSON distributions.
 
 #### Bioschemas
+
+Bioschemas is a community effort to facilitate the structured mark up of web pages in Life Sciences. NOTE: Add here Ginger paragraph.
+
+Bioschemas provides a profile, i.e., structured semantic specification together with recommendations of usage and examples, to model [datasets](https://bioschemas.org/profiles/Dataset) that can be used to describe syntethic data with rich metadata so it becomes more /re(usable by third parties. As the Bioschemas Dataset profile covers cases beyond ML and synthetic data, there is a need of some cusotmization for its effective use, without deviating much from the general case to preserve compatibility with other datasets. One of the desired characteristics when describing syntethic data, and more in general data that could be used in ML training processes, is providing information useful for training purposes. For instace, the sort of content is important to assess whether or not the data is appropriate for a task, e.g., protein or phenotype data, cancer patients stage II, etc. The distribution and characteristiscs of the data points are also an important aspect for classification tasks, i.e., a training algorithm needs to take into account data skews and possible bias. These two where the syntethic data description cases where we focused on during the BioHackathon 2022.
+
+Bioschemas does not provide yet a specific way to express what the content (or topic) of a dataset is about. There are two Dataset properties that could be used to this end: [keywords](https://schema.org/keywords) and [about](https://schema.org/about). In both cases, it is possible to link to controlled vocabularies via a [DefinedTerm](https://schema.org/DefinedTerm), making it easier for machines to "understand" the topic. Our recommendation is using topics defined in the EDAM ontology, i.e., those under the branch [Topic](http://edamontology.org/topic_0003), for instance _drug discovery_ or _data management_. Whether favouring _keywords_ or _about_ to describe a dataset topic is a discussion that will be further develop in the Bioschemas community.
+
+Regarding the description of data points and other characteristics of the dataset, e.g., age, sample size, sample size, this could be achieved via [variableMeasured](https://schema.org/variableMeasured) with a value expressed using a [PropertyValue](https://schema.org/PropertyValue). Table 1 shows some examples with the corresponding markup in JSON-LD. For other elements necessary to the description of syntethic datasets, we refere the reader to the comprenhensive [spreadsheet mapping](https://docs.google.com/spreadsheets/d/1Gu5s-MOJumUOug5eghS2JTpwEknG7w_XpykBRrmDSw4).
+
+
+| Characteristic| JSON-LD markup|
+| --- | --- |
+| Age| ```variableMeasured : [{"@type": "PropertyValue", "name": "Age", "value": 32, "unitText": "year"}, "variableMeasured" : {"@type": "PropertyValue", "name": "Age", "value": "adult"}]"```|
+| Sample size| ```variableMeasured : [{"@type": "PropertyValue", "name": "Sample size", "value": 10}]"``` |
+| Number of attritutes| ```variableMeasured : {"@type": "PropertyValue", "name": "Number of Attributes", "value": 32}"```|
 
 ### Repository for deposition
 
