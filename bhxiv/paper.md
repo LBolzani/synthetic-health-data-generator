@@ -15,14 +15,19 @@ authors:
     affiliation: 2
   - name: Marcos Casado Barbero
     orcid: 0000-0002-7747-6256
-    affiliation: 3
+    affiliation: 4
+  - name: Sergi Aguiló-Castillo
+    orcid: 0000-0003-0830-5733
+    affiliation: 3    
 affiliations:
   - name: Human Genetics, Leiden University Medical Center, Leiden, Netherlands
     index: 1
   - name: Luxembourg Center for Systems Biomedicine, University of Luxembourg, Luxembourg
     index: 2
-  - name: European Molecular Biology Laboratory - European Bioinformatics Institute (EMBL-EBI), Hinxton CB10 1SD, UK
+  - name: Barcelona Supercomputing Center, Barcelona, Spain
     index: 3
+  - name: European Molecular Biology Laboratory - European Bioinformatics Institute (EMBL-EBI), Hinxton CB10 1SD, UK
+    index: 4
 date: 11 November 2022
 cito-bibliography: paper.bib
 event: BioHackEU22
@@ -75,7 +80,78 @@ We first defined an input data type which was _tabular data_ for its simplicity.
 
 We experimented with three synthetic data generators: SDV, DataSynthesizer and Synthea.  
 
+#### Synthetic Data Vault (SDV)
+[@Patki_2016_SDV] presented a framework known as Synthetic Data Vault (SDV) that was intended to generate synthetic relational data. Such a framework combines both statistical approaches and deep learning method to accommodate the synthetization. The authors of this framework were taking into the account the generation of synthetic data that is statistically similar to the original one even in terms of missing values, categorical and datetime distribution. Meanwhile, the authors have focused on increasing the privacy by enabling the user to adjust the model’s parameters in order to add different noisiness.
+
+Within the statistical part, the SDV framework utilized different versions of multivariate Copula Gaussian distribution (e.g. uniform, truncated gaussian, gamma, beta, etc.). In this regard, two main aspects have been considered including distribution and covariance where the first refers to the distributional probability of the values within each attribute while the latter refers to the impact of each value within an attribute in accordance with the values within other attributes. In addition, SDV framework has utilized an approach called Conditional Parameter Aggregation (CPA) to mimic the relationships between tables during the generation of a relational database in which the user could provide metadata about the tables. Furthermore, SDV framework provides two paradigms of synthetic generation through mode-based which aims at generating synthetic data based on an existing model, and knowledge-based which aims at expanding an existing data by generating more examples. 
+
+On the other hand, SDV framework also utilizes a deep learning architecture known as Generative Adversarial Network (GAN). This architecture is based on Deep Neural Network which consists of two main components; generator and discriminator where the first refers to the model that is trained to generate new data while the latter refers to the model that is trained to classify the data into real or synthetic [@Wang_2017_Generative]. 
+
+#### Synthea<sup>TM</sup>
+
+Synthea<sup>TM</sup> generates synthetic data from medical history of patients. It aims to create high-quality, realistic data related to patients and associated health records without privacy and security constraints. Thus, with this approach, we can generate data for creating OMOP synthetic datasets.
+
+One of the greatest qualities of Synthea<sup>TM</sup> is having more than 90 different modules, each one containing models for different diseases or medical observations. However, most of these modules have dependencies between them, and it is not recommended restrict the search for a subset of them.
+
+For creating a Synthea<sup>TM</sup> dataset we have used the guide section "Population of OMOP CDM tables with synthetic patient data" from the Biohackaton 2021 project called [OMOP to Phenopackets for COVID-19 analytics](https://github.com/elixir-europe/biohackathon-projects-2021/blob/main/projects/36/bhxiv/paper.md). The basic command line to generate data, in Synthea<sup>TM</sup> v2.7, is the following:
+
+```
+java -jar synthea-with-dependencies.jar -p 1000 \
+-c /pathtosynthea/src/main/resources/synthea.properties
+```
+
+Where  `-p` is the population size of the data generated and `-c` is the configuration file that must be edited to export data in CSV format by uncomment the following line `exporter.csv.export = true` . Other options are shown with the `-h` option:
+
+```
+java -jar synthea-with-dependencies.jar -h
+Usage: run_synthea [options] [state [city]]
+Options: [-s seed] [-cs clinicianSeed] [-p populationSize]
+         [-r referenceDate as YYYYMMDD]
+         [-g gender] [-a minAge-maxAge]
+         [-o overflowPopulation]
+         [-m moduleFileWildcardList]
+         [-c localConfigFilePath]
+         [-d localModulesDirPath]
+         [-i initialPopulationSnapshotPath]
+         [-u updatedPopulationSnapshotPath]
+         [-t updateTimePeriodInDays]
+         [-f fixedRecordPath]
+         [--config* value]
+          * any setting from src/main/resources/synthea.properties
+Examples:
+run_synthea Massachusetts
+run_synthea Alaska Juneau
+run_synthea -s 12345
+run_synthea -p 1000)
+run_synthea -s 987 Washington Seattle
+run_synthea -s 21 -p 100 Utah "Salt Lake City"
+run_synthea -g M -a 60-65
+run_synthea -p 10 --exporter.fhir.export true
+run_synthea -m moduleFilename:anotherModule:module*
+run_synthea --exporter.baseDirectory "./output_tx/" Texas
+```
+
+To generate different type of data with modules, you must use the `-m` option with the name of your modules. Check the page with an example [here](https://github.com/synthetichealth/synthea/wiki/The--M-Feature).
+
+After producing the CSV files, you need to create the OMOP database on your own or continue following the guide from [OMOP to Phenopackets for COVID-19 analytics](https://github.com/elixir-europe/biohackathon-projects-2021/blob/main/projects/36/bhxiv/paper.md). The approach is not embedded in the main infrastructure as the different output options need to be discussed for the FrontEnd part.
+
 ### Quality assessment
+#### SDV Parameter Comparison
+As mentioned earlier, SDV contains a wide range of parameters during the generation of synthetic data. These parameters are either referring to the desired statistical distribution through different Copula Gaussian or even using the deep learning of GAN which called CTGAN. Using the Breast Cancer dataset, a comparison between these parameters have been conducted in which the dataset was synthesized multiple times using one of these parameters. To evaluate this comparison, a metric score within SDV has been used which compare the synthetic data with the original one. Figure 1 shows such a comparison.
+
+https://github.com/LBolzani/synthetic-health-data-generator/blob/main/images/SDV%20Model%20Comparison.png
+Figure 1. SDV model comparison
+
+As shown in Figure 1, the most accurate generation for the Breast Cancer dataset was depicted by GaussianCopula through Kernel Density Estimation (KDE) which has the highest evaluation score of 0.96. Note that, this means that this distribution significantly suits the Breast Cancer dataset. 
+
+#### SDV Utility Classification Assessment
+As an additional aspect of evaluation, investigating the classification performance of the synthetic data alongside the original one would provide a significant insight on how the synthetic data could be used for further downstream analysis. To this end, the synthetic data generated by the best SDV model parameter of GaussianCopula-KDE has been used. In order to provide a consistent evaluation on such a classification task, a classifier of Random Forest (RF) has been used with 10 cross-fold validation for both datasets (i.e., real and synthetic). In addition, different parameters of RF have been also considered within the classification including the criterion (i.e., gini or entropy) and max-features (i.e., auto, sqrt, log2). Both datasets will be divided into training and testing and classified using each RF parameter through the use of Grid Search in which the average F1-score accuracy will be considered for each experiment. Figure 2 shows the results of this comparison. 
+
+https://github.com/LBolzani/synthetic-health-data-generator/blob/main/images/RF%20Classification%20Real%20and%20Synthetic.png
+Figure 2. Utility classification using RF
+
+As depicted in Figure 2, for both real and synthetic dataset, there were no significant differences between the training and testing which demonstrates the absence of either underfitting or overfitting. On the other hand, the results of accuracy for the synthetic were lower but still similar to the real ones which proves the efficacy of the generated synthetic data. 
+
 
 ### Web UI
 
