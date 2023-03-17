@@ -18,7 +18,12 @@ authors:
     affiliation: 4
   - name: Sergi Aguiló-Castillo
     orcid: 0000-0003-0830-5733
-    affiliation: 3    
+    affiliation: 3  
+  - name: Leyla Jael Castro
+    orcid: 0000-0003-3986-0510
+    affiliation: 5  
+  - name: Ginger Tsueng
+    affiliation: 6 
 affiliations:
   - name: Human Genetics, Leiden University Medical Center, Leiden, Netherlands
     index: 1
@@ -28,6 +33,10 @@ affiliations:
     index: 3
   - name: European Molecular Biology Laboratory - European Bioinformatics Institute (EMBL-EBI), Hinxton CB10 1SD, UK
     index: 4
+  - name: ZB MED Information Centre for Life Sciences, Cologne, Germany
+    index: 5 
+  - name: Scripps Research Institute, La Jolla, CA 92037, US 
+    index: 6    
 date: 11 November 2022
 cito-bibliography: paper.bib
 event: BioHackEU22
