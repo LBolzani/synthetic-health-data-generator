@@ -1,56 +1,126 @@
 [
 {
-    "domain":[
+    "topic":[
         {
-            "id":"http://edamontology.org/topic_2640",
-            "label":"Oncology"
+            "name":"Topic",
+            "inDefinedTermSet":"EDAM",
+            "termCode":"topic_0003",
+            "IRI":"http://edamontology.org/topic_0003"
         }
     ],
     "dataType":[
         {
-            "id":"http://edamontology.org/data_3558",
-            "label":"Clinical trial report"
+            "name":"Data",
+            "inDefinedTermSet":"EDAM",
+            "termCode":"topic_0006",
+            "IRI":"http://edamontology.org/data_0006"
         }
     ],
-    "fileType":[
+    "application":[
         {
-            "id":"http://edamontology.org/format_3752",
-            "label":"CSV"
+            "name":"Operation",
+            "inDefinedTermSet":"EDAM",
+            "termCode":"operation_0004",
+            "IRI":"http://edamontology.org/operation_0004"
         }
     ],
-    "application":{
-        "id":"http://purl.obolibrary.org/obo/STATO_0000481",
-        "label":"genomic best linear unbiased prediction"
-    },
     "license":"https://creativecommons.org/licenses/by-nc-sa/4.0/",
-    "policies":["DUO:0000006"],
-    "generationMethod":{
-        "id":"NA",
-        "label":"NA"
-    },
-    "credits":[
+    "generationMethod":[
         {
-            "ORCID":"XXXX-XXXX-XXXX-XXXX",
-            "name": "XXXXX",
-            "type": "Person/Institution"
+            "name":"data transformation",
+            "inDefinedTermSet":"OBI",
+            "termCode":"OBI_0200000",
+            "IRI":"http://purl.obolibrary.org/obo/OBI_0200000"            
         }
     ],
-    "DOI":"NA",
-    "datasetName": "Breast Cancer Wisconsin (Diagnostic) Data Set",
+    "creator":[
+        {
+            "identifier":"https://orcid.org/0000-0002-1825-0097"
+        },
+        {
+            "identifier":{
+                "name":"ORCID",
+                "url":"https://orcid.org/0000-0002-1825-0097"
+            }
+        },
+        {
+            "identifier":{
+                "name":"ORCID",
+                "value":"0000-0002-1825-0097"
+            }
+        }
+    ],
+    "datasetId":[
+        {
+            "value":"10.5281/zenodo.7388957"
+        },
+        {
+            "url":"https://doi.org/10.5281/zenodo.7388957"
+        }
+    ],
+    "datasetName":"Breast Cancer Wisconsin (Diagnostic Data Set)",
     "datasetDescription":"Predict whether the cancer is benign or malignant",
-    "publicationYear": 2022,
-    "species":{
-        "id":"9606",
-        "label":"Homo sapiens"
-    },
-    "sampleSize": 10000,
-    "instanceType": "cell nuclei",
-    "numberAttributes": 32,
-    "paperId":"NA",
-    "tool": "https://www.kaggle.com/code/berkemk/breast-cancer-prediction-svc",
-    "language": "English",
-    "technology": ["Affymetrix"],
-    "attributeType": "Mixed: numerical and categorical",
-    "missingValues": "None"
+    "datePublished": 2022,
+    "organismTaxonomicIdentifier":[
+        {
+            "name":"Homo Sapiens",
+            "identifier":"http://purl.obolibrary.org/obo/NCBITaxon_9606",
+            "taxonRank":"https://www.wikidata.org/wiki/Q7432",
+            "alternateName":"human"
+        }
+    ],
+    "biologicalSex":[
+        {
+            "propertyID":"http://purl.obolibrary.org/obo/PATO_0000047",
+            "value":"female"
+        }
+    ],
+    "ageRange":[
+        {
+            "value":32,
+            "unitText":"year"
+        },
+        {
+            "value":"adult"
+        }
+    ],
+    "sampleSize":10,
+    "instanceType":[
+        {
+            "name":"Subject",
+            "inDefinedTermSet":"DCMI Metadata Terms",
+            "termCode":"DCMI:subject",
+            "IRI":"http://purl.org/dc/elements/1.1/subject"
+        }
+    ],
+    "numberAttributes":32,
+    "fileType":[
+        "CSV",
+        {
+            "name":"CSV",
+            "inDefinedTermSet":"EDAM",
+            "termCode":"format_3752",
+            "IRI":"http://edamontology.org/format_3752"            
+        }
+    ],
+    "articleId":[
+        {
+            "doi":"https://doi.org/10.1093/bioinformatics/btac205",
+            "pubMed":"35561182"
+        }
+    ],
+    "resourceId":["https://www.kaggle.com/code/berkemk/breast-cancer-prediction-svc"],
+    "language":"English",
+    "assayType":[
+        {
+            "name":"Laboratory techniques",
+            "inDefinedTermSet":"EDAM",
+            "termCode":"topic_3361",
+            "IRI":"http://edamontology.org/topic_3361"
+        },
+        "Affymetrix"],
+    "attributeType":"Mixed: numerical and categorical",
+    "percentageMissingValues":0,
+    "recordUrl":"https://zenodo.org/record/7305578"
 }
 ]
