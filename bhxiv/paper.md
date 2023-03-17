@@ -168,6 +168,7 @@ Having in mind the provision of synthetic datasets that were reusable for the co
 The model is available as TSV and JSON distributions.
 
 #### Bioschemas
+Bioschemas profiles are community-standardized recommendations on the application of Schema.org types and define a subset of properties and constraints relevant to the life sciences. To further improve FAIRness of the synthetic datasets, we mapped properties in our metadata model to the Bioschemas Dataset profile and included examples of how each property could be used to capture the metadata in JSON Schema, following the Bioschemas Dataset profile. 
 
 ### Repository for deposition
 
