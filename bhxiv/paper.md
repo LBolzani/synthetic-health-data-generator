@@ -175,7 +175,21 @@ Having in mind the provision of synthetic datasets that were reusable for the co
 The model is available as TSV and JSON distributions.
 
 #### Bioschemas
-Bioschemas profiles are community-standardized recommendations on the application of Schema.org types and define a subset of properties and constraints relevant to the life sciences. To further improve FAIRness of the synthetic datasets, we mapped properties in our metadata model to the Bioschemas Dataset profile and included examples of how each property could be used to capture the metadata in JSON Schema, following the Bioschemas Dataset profile. 
+[Bioschemas](https://bioschemas.org/) [@bioschemas_poster] is a community effort to facilitate the structured mark up of web pages in Life Sciences. Bioschemas profiles are community-standardized recommendations on the application of Schema.org types defining a subset of properties and constraints relevant to the life sciences. To further improve FAIRness of the synthetic datasets, we mapped properties in our metadata model to the Bioschemas Dataset profile and included examples of how each property could be used to capture the metadata in JSON Schema, following the Bioschemas Dataset profile. 
+
+Bioschemas provides a profile, i.e., structured semantic specification together with recommendations of usage and examples, to model [datasets](https://bioschemas.org/profiles/Dataset) that can be used to describe syntethic data with rich metadata so it becomes more /re(usable by third parties. As the Bioschemas Dataset profile covers cases beyond ML and synthetic data, there is a need of some cusotmization for its effective use, without deviating much from the general case to preserve compatibility with other datasets. One of the desired characteristics when describing syntethic data, and more in general data that could be used in ML training processes, is providing information useful for training purposes. For instace, the sort of content is important to assess whether or not the data is appropriate for a task, e.g., protein or phenotype data, cancer patients stage II, etc. The distribution and characteristiscs of the data points are also an important aspect for classification tasks, i.e., a training algorithm needs to take into account data skews and possible bias. These two where the syntethic data description cases where we focused on during the BioHackathon 2022.
+
+Bioschemas does not provide yet a specific way to express what the content (or topic) of a dataset is about. There are two Dataset properties that could be used to this end: [keywords](https://schema.org/keywords) and [about](https://schema.org/about). In both cases, it is possible to link to controlled vocabularies via a [DefinedTerm](https://schema.org/DefinedTerm), making it easier for machines to "understand" the topic. Our recommendation is using topics defined in the EDAM ontology, i.e., those under the branch [Topic](http://edamontology.org/topic_0003), for instance _drug discovery_ or _data management_. Whether favouring _keywords_ or _about_ to describe a dataset topic is a discussion that will be further develop in the Bioschemas community.
+
+Regarding the description of data points and other characteristics of the dataset, e.g., age, sample size, sample size, this could be achieved via [variableMeasured](https://schema.org/variableMeasured) with a value expressed using a [PropertyValue](https://schema.org/PropertyValue). Table 1 shows some examples with the corresponding markup in JSON-LD. For other elements necessary to the description of syntethic datasets, we refere the reader to the comprenhensive [spreadsheet mapping](https://docs.google.com/spreadsheets/d/1Gu5s-MOJumUOug5eghS2JTpwEknG7w_XpykBRrmDSw4).
+
+
+| Characteristic| JSON-LD markup|
+| --- | --- |
+| Age| ```variableMeasured : [{"@type": "PropertyValue", "name": "Age", "value": 32, "unitText": "year"}, "variableMeasured" : {"@type": "PropertyValue", "name": "Age", "value": "adult"}]"```|
+| Sample size| ```variableMeasured : [{"@type": "PropertyValue", "name": "Sample size", "value": 10}]"``` |
+| Number of attritutes| ```variableMeasured : {"@type": "PropertyValue", "name": "Number of Attributes", "value": 32}"```|
+
 
 ### Repository for deposition
 
