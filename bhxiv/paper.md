@@ -24,6 +24,9 @@ authors:
     affiliation: 5  
   - name: Ginger Tsueng
     affiliation: 6
+  - name: Magnus Palmblad
+    orcid: 0000-0002-5865-8994
+    affiliation: 8
   - name: Basel Alshaikhdeeb
     orcid: 0000-0002-7518-2676
     affiliation: 7    
@@ -42,6 +45,8 @@ affiliations:
     index: 6
   - name: Luxembourg Center for Systems Biomedicine, University of Luxembourg, Luxembourg
     index: 7    
+  - name: Center for Proteomics and Metabolomics, Leiden University Medical Center, Leiden, Netherlands
+    index: 8
 date: 11 November 2022
 cito-bibliography: paper.bib
 event: BioHackEU22
