@@ -10,23 +10,27 @@ authors:
   - name: Núria Queralt-Rosinach
     orcid: 0000-0003-0169-8159
     affiliation: 1
+  - name: Basel Alshaikhdeeb
+    orcid: 0000-0002-7518-2676
+    affiliation: 2 
+  - name: Luca Bolzani
+    orcid: 
+    affiliation: 2
   - name: Muhammad Shoaib
     orcid: 0000-0002-4854-4635
     affiliation: 2
-  - name: Marcos Casado Barbero
-    orcid: 0000-0002-7747-6256
-    affiliation: 4
   - name: Sergi Aguiló-Castillo
     orcid: 0000-0003-0830-5733
-    affiliation: 3  
+    affiliation: 3
+  - name: Marcos Casado Barbero
+    orcid: 0000-0002-7747-6256
+    affiliation: 4  
   - name: Leyla Jael Castro
     orcid: 0000-0003-3986-0510
     affiliation: 5  
   - name: Ginger Tsueng
     affiliation: 6
-  - name: Basel Alshaikhdeeb
-    orcid: 0000-0002-7518-2676
-    affiliation: 7    
+   
 affiliations:
   - name: Human Genetics, Leiden University Medical Center, Leiden, Netherlands
     index: 1
