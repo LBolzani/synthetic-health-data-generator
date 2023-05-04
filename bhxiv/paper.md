@@ -26,7 +26,10 @@ authors:
     affiliation: 6
   - name: Basel Alshaikhdeeb
     orcid: 0000-0002-7518-2676
-    affiliation: 7    
+    affiliation: 7
+  - name: Matúš Kalaš
+    orcid: 0000-0002-1509-4981
+    affiliation: 8
 affiliations:
   - name: Human Genetics, Leiden University Medical Center, Leiden, Netherlands
     index: 1
@@ -41,7 +44,9 @@ affiliations:
   - name: Scripps Research Institute, La Jolla, CA 92037, US
     index: 6
   - name: Luxembourg Center for Systems Biomedicine, University of Luxembourg, Luxembourg
-    index: 7    
+    index: 7
+  - name: Department of Informatics, University of Bergen, Norway
+    index: 8
 date: 5 May 2023
 cito-bibliography: paper.bib
 event: BH22EU
