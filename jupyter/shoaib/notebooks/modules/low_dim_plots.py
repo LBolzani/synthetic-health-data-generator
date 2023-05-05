@@ -59,7 +59,7 @@ def create_plots(comps_or, comps_sy, labels_or, labels_sy, output=None):
                         hue=labels_sy,
                         palette="Set2",
                         s=50)
-        ax.set_title("Synthatic Data", fontsize=20)
+        ax.set_title("synthetic Data", fontsize=20)
         ax.set(xticks=[], yticks=[])
 
         if output is not None:
@@ -81,7 +81,7 @@ def create_plots(comps_or, comps_sy, labels_or, labels_sy, output=None):
                             palette="Set1",
                             s=50)
 
-            ax.set_title("Synthatic Data", fontsize=20)
+            ax.set_title("synthetic Data", fontsize=20)
             ax.set(xticks=[], yticks=[])
 
     plt.subplots_adjust(wspace=0.10)

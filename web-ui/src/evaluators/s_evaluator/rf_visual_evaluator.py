@@ -31,7 +31,7 @@ def plot_random_forest(df_or, df_sy, label_or, label_sy, output):
 
     ax = fig.add_subplot(nrows, ncols, 2)
     plot_random_forest_single_df(df_sy, label_sy, ax)
-    ax.set_title("Synthatic Data with Clusters", fontsize=20)
+    ax.set_title("synthetic Data with Clusters", fontsize=20)
 
     if output is not None:
         ax = fig.add_subplot(nrows, ncols, 3)
@@ -40,7 +40,7 @@ def plot_random_forest(df_or, df_sy, label_or, label_sy, output):
 
         ax = fig.add_subplot(nrows, ncols, 4)
         plot_random_forest_single_df(df_sy, output, ax)
-        ax.set_title("Synthatic Data with Clusters", fontsize=20)
+        ax.set_title("synthetic Data with Clusters", fontsize=20)
 
     plt.subplots_adjust(wspace=1.0)
     plt.subplots_adjust(hspace=0.20)
