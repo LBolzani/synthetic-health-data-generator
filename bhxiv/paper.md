@@ -30,7 +30,7 @@ authors:
     affiliation: 5  
   - name: Ginger Tsueng
     affiliation: 6   
-  - name: Soumyabrata Gosh
+  - name: Soumyabrata Ghosh
     orcid: 0000-0002-9646-1439
     affiliation: 2  
   - name: Venkata Pardhasaradhi Satagopam
