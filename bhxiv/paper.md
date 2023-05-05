@@ -10,6 +10,12 @@ authors:
   - name: Núria Queralt-Rosinach
     orcid: 0000-0003-0169-8159
     affiliation: 1
+  - name: Basel Alshaikhdeeb
+    orcid: 0000-0002-7518-2676
+    affiliation: 2 
+  - name: Luca Bolzani
+    orcid: 
+    affiliation: 2
   - name: Muhammad Shoaib
     orcid: 0000-0002-4854-4635
     affiliation: 2
