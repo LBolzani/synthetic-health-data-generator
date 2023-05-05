@@ -24,7 +24,10 @@ authors:
     affiliation: 4
   - name: Sergi Aguiló-Castillo
     orcid: 0000-0003-0830-5733
-    affiliation: 3  
+    affiliation: 3 
+  - name: Davide Cirillo
+    orcid: 
+    affiliation: 3 
   - name: Leyla Jael Castro
     orcid: 0000-0003-3986-0510
     affiliation: 5  
