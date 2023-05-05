@@ -33,7 +33,7 @@ authors:
   - name: Soumyabrata Gosh
     orcid: 0000-0002-9646-1439
     affiliation: 2  
-  - name: Venkata Pardhasaradhi Satagopam Venkata
+  - name: Venkata Pardhasaradhi Satagopam
     orcid: 0000-0002-6532-5880
     affiliation: 2  
 affiliations:
