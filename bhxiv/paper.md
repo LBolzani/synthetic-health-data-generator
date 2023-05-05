@@ -266,11 +266,11 @@ The BioHackathon-Europe venue set a perfect environment for engagement: our proj
 As long-term outcomes, we are planning to submit a manuscript on the synthetic health data infrastructure developed following ELIXIR requirements. The development of the infrastructure _per se_ is a long-term outcome, where we envision adding other components such as implementing evaluation metrics to assess the quality of the generated synthetic data and a direct deposition of the synthetic datasets to recommended repositories.
 
 ## Contributions
-
+All authors actively participated during the hackathon to produce the outcomes we detail in this paper, they provided content and all reviewed the paper. Specifically, NQR contributed to providing workflows, the metadata model, wrote about these in dedicated sections and drafted the final paper. BA and SAC contributed to providing workflows and wrote about this in the paper. MS contributed to the evaluation metrics of the synthetic data and wrote about this in the paper. MCB, SAC, DW, LJC, GT and RS contributed to the metadata model and wrote about this in the paper. MK and MP contributed to the metadata model mapping to EDAM.  
 
 ## Acknowledgements
 
-We thank the organisers of the BioHackathon-Europe 2022 for travel support for some of the authors.
+We thank the organisers of the BioHackathon-Europe 2022 for travel support for some of the authors. Special thanks to Fotis Psomopoulos, Venkata Pardhasaradhi Satagopam, Soumyabrata Ghosh, Davide Cirillo, Salvador Capella Gutierrez for having the original project idea and contributing during the hackathon. Also, Nick Juty and Francis Chemorion for your very valuable contributions. Finally, to all participants of the BioHackathon-Europe 2022 that made possible this project engaging with fruitful discussions or giving us support.
 
 
 ## References
