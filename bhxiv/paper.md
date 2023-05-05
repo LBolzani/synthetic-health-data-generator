@@ -1,6 +1,6 @@
 ---
-title: 'Infrastructure for Synthetic Health Data'
-title_short: 'Synthetic Health Data'
+title: 'Infrastructure for synthetic health data'
+title_short: 'Synthetic health data'
 tags:
   - Health data
   - Synthetic data
