@@ -1,6 +1,6 @@
 ---
-title: 'Infrastructure for Synthetic Health Data'
-title_short: 'Synthetic Health Data'
+title: 'Infrastructure for synthetic health data'
+title_short: 'Synthetic health data'
 tags:
   - Health data
   - Synthetic data
@@ -19,18 +19,32 @@ authors:
   - name: Muhammad Shoaib
     orcid: 0000-0002-4854-4635
     affiliation: 2
-  - name: Sergi Aguiló-Castillo
-    orcid: 0000-0003-0830-5733
-    affiliation: 3
+  - name: Luca Bolzani
+    orcid: 0000-0001-9893-0561
+    affiliation: 2
+  - name: Basel Alshaikhdeeb
+    orcid: 0000-0002-7518-2676
+    affiliation: 2
   - name: Marcos Casado Barbero
     orcid: 0000-0002-7747-6256
-    affiliation: 4  
+    affiliation: 4
+  - name: Sergi Aguiló-Castillo
+    orcid: 0000-0003-0830-5733
+    affiliation: 3 
+  - name: Davide Cirillo
+    orcid: 
+    affiliation: 3 
   - name: Leyla Jael Castro
     orcid: 0000-0003-3986-0510
     affiliation: 5  
   - name: Ginger Tsueng
-    affiliation: 6
-   
+    affiliation: 6   
+  - name: Soumyabrata Ghosh
+    orcid: 0000-0002-9646-1439
+    affiliation: 2  
+  - name: Venkata Pardhasaradhi Satagopam
+    orcid: 0000-0002-6532-5880
+    affiliation: 2  
 affiliations:
   - name: Human Genetics, Leiden University Medical Center, Leiden, Netherlands
     index: 1
@@ -44,8 +58,7 @@ affiliations:
     index: 5
   - name: Scripps Research Institute, La Jolla, CA 92037, US
     index: 6
-  - name: Luxembourg Center for Systems Biomedicine, University of Luxembourg, Luxembourg
-    index: 7    
+ 
 date: 11 November 2022
 cito-bibliography: paper.bib
 event: BioHackEU22
@@ -207,18 +220,18 @@ For executability and portability, we deployed the application in a [docker](htt
 In parallel on providing infrastructure for the generation of synthetic health data, some experts on health data, data modelling and FAIR discussed on providing a FAIR implementation of the generated synthetic data. Next, we present our proposal on how to make the synthetic health datasets FAIR for others to reuse. Firstly, we defined a minimal machine-readable metadata model for synthetic health data. Secondly, we identified an existing data repository where to deposit the synthetic data once generated. We concluded to use the BioStudies repository from EMBL-EBI (https://www.ebi.ac.uk/biostudies/). In the following sections we describe the metadata model and the criteria used to select an appropriate repository for deposition.
 
 ### 1. Metadata model
-Having in mind the provision of synthetic datasets that were reusable for the community and readable by machines, i.e., FAIR data, we designed a metadata model to use as guidance for end-users of our framework. This metadata model is publicly available on [GitHub repository](https://github.com/NuriaQueralt/synthetic-health-data-generator/blob/34e76cd1c3c7f79aebb98ac89ef82b240fae46b0/metadata-model/synthetic_health_data__metadata_model_v1_january_2023.tsv). It is meant primarily to improve findability of synthetic health datasets in public repositories. It is composed of 24 descriptors that, together, provide context for 4 different semantic groups: the dataset, generation tool, attribution and provenance. Not all of these descriptors are required for a functional metadata model, and thus we ranked them following the MoSCoW criteria: 11 Must-, 8 Should- and 7 Could-haves. For the sake of consistency in the metadata of these fields, we provided the recommended bio-ontology mappings (preferably OBO ontologies) to use when populating the metadata model. Due to EDAM developers also attended the BioHackathon-Europe, we were able to align with EDAM's ontology and map most terms to this ripe ontology.
+Having in mind the provision of synthetic datasets that were reusable for the community and readable by machines, i.e., FAIR data, we designed a metadata model to use as guidance for end-users of our framework. This metadata model is publicly available on [GitHub repository](https://github.com/LBolzani/synthetic-health-data-generator/blob/main/metadata-model/synthetic_health_data__metadata_model_v1_january_2023.tsv). It is meant primarily to improve findability of synthetic health datasets in public repositories. It is composed of 24 descriptors that, together, provide context for 4 different semantic groups: the dataset, generation tool, attribution and provenance. Not all of these descriptors are required for a functional metadata model, and thus we ranked them following the MoSCoW criteria: 11 Must-, 8 Should- and 7 Could-haves. For the sake of consistency in the metadata of these fields, we provided the recommended bio-ontology mappings (preferably OBO ontologies) to use when populating the metadata model. Due to EDAM developers also attended the BioHackathon-Europe, we were able to align with EDAM's ontology and map most terms to this ripe ontology.
 
-These 24 descriptors set were defined after reviewing several existing repositories for ML datasets such as [Kaggle](https://www.kaggle.com/) or [huggingface](https://huggingface.co/), and identified a minimal number and linked to a MoSCoW rank according to our experience from other projects such as the curation effort within the ELIXIR ML/synthetic data group. Equity and fairness are very important concerns when developing health tools for research and decision making for the clinical setting. To enable this we propose to record the _biological sex_ property. The model is available as TSV and JSON distributions on our [project GitHub repository](https://github.com/LBolzani/synthetic-health-data-generator/tree/main/metadata-model).
+These 24 descriptors were defined after reviewing several existing repositories for ML datasets such as [Kaggle](https://www.kaggle.com/) or [huggingface](https://huggingface.co/). We identified a minimal number of basic metadata descriptors that were common in several of these repositories or were necessary for the description of health data for biomedical research, and linked them to a MoSCoW rank according to our experience from other projects such as the curation effort within the ELIXIR ML/synthetic data group. For instance, equity and fairness are very important concerns when developing health tools for research and decision making in the clinical setting. To enable a description of the male and female percentages present in the synthetic dataset we propose to record the _biological sex_ property. The model is available as TSV and JSON distributions on our [project GitHub repository](https://github.com/LBolzani/synthetic-health-data-generator/tree/main/metadata-model).
 
 #### Bioschemas
 [Bioschemas](https://bioschemas.org/) [@bioschemas_poster] is a community effort to facilitate the structured mark up of web pages in Life Sciences. Bioschemas profiles are community-standardized recommendations on the application of Schema.org types defining a subset of properties and constraints relevant to the life sciences. To further improve FAIRness of the synthetic datasets, we mapped properties in our metadata model to the Bioschemas Dataset profile and included examples of how each property could be used to capture the metadata in JSON Schema, following the Bioschemas Dataset profile.
 
-Bioschemas provides a profile, i.e., structured semantic specification together with recommendations of usage and examples, to model [datasets](https://bioschemas.org/profiles/Dataset) that can be used to describe syntethic data with rich metadata so it becomes more /re(usable by third parties. As the Bioschemas Dataset profile covers cases beyond ML and synthetic data, there is a need of some cusotmization for its effective use, without deviating much from the general case to preserve compatibility with other datasets. One of the desired characteristics when describing syntethic data, and more in general data that could be used in ML training processes, is providing information useful for training purposes. For instace, the sort of content is important to assess whether or not the data is appropriate for a task, e.g., protein or phenotype data, cancer patients stage II, etc. The distribution and characteristiscs of the data points are also an important aspect for classification tasks, i.e., a training algorithm needs to take into account data skews and possible bias. These two where the syntethic data description cases where we focused on during the BioHackathon 2022.
+Bioschemas provides a profile, i.e., structured semantic specification together with recommendations of usage and examples, to model [datasets](https://bioschemas.org/profiles/Dataset) that can be used to describe synthetic data with rich metadata so it becomes more /re(usable by third parties. As the Bioschemas Dataset profile covers cases beyond ML and synthetic data, there is a need of some cusotmization for its effective use, without deviating much from the general case to preserve compatibility with other datasets. One of the desired characteristics when describing synthetic data, and more in general data that could be used in ML training processes, is providing information useful for training purposes. For instace, the sort of content is important to assess whether or not the data is appropriate for a task, e.g., protein or phenotype data, cancer patients stage II, etc. The distribution and characteristiscs of the data points are also an important aspect for classification tasks, i.e., a training algorithm needs to take into account data skews and possible bias. These two were the synthetic data description cases which we focused on during the BioHackathon 2022.
 
 Bioschemas does not provide yet a specific way to express what the content (or topic) of a dataset is about. There are two Dataset properties that could be used to this end: [keywords](https://schema.org/keywords) and [about](https://schema.org/about). In both cases, it is possible to link to controlled vocabularies via a [DefinedTerm](https://schema.org/DefinedTerm), making it easier for machines to "understand" the topic. Our recommendation is using topics defined in the EDAM ontology, i.e., those under the branch [Topic](http://edamontology.org/topic_0003), for instance _drug discovery_ or _data management_. Whether favouring _keywords_ or _about_ to describe a dataset topic is a discussion that will be further develop in the Bioschemas community.
 
-Regarding the description of data points and other characteristics of the dataset, e.g., age, sample size, sample size, this could be achieved via [variableMeasured](https://schema.org/variableMeasured) with a value expressed using a [PropertyValue](https://schema.org/PropertyValue). Table 1 shows some examples with the corresponding markup in JSON-LD. For other elements necessary to the description of syntethic datasets, we refere the reader to the comprenhensive [spreadsheet mapping](https://docs.google.com/spreadsheets/d/1Gu5s-MOJumUOug5eghS2JTpwEknG7w_XpykBRrmDSw4).
+Regarding the description of data points and other characteristics of the dataset, e.g., age, sample size, sample size, this could be achieved via [variableMeasured](https://schema.org/variableMeasured) with a value expressed using a [PropertyValue](https://schema.org/PropertyValue). Table 1 shows some examples with the corresponding markup in JSON-LD. For other elements necessary to the description of synthetic datasets, we refere the reader to the comprenhensive [spreadsheet mapping](https://docs.google.com/spreadsheets/d/1Gu5s-MOJumUOug5eghS2JTpwEknG7w_XpykBRrmDSw4).
 
 
 | Characteristic| JSON-LD markup|
@@ -227,7 +240,7 @@ Regarding the description of data points and other characteristics of the datase
 | Sample size| ```variableMeasured : [{"@type": "PropertyValue", "name": "Sample size", "value": 10}]"``` |
 | Number of attritutes| ```variableMeasured : {"@type": "PropertyValue", "name": "Number of Attributes", "value": 32}"```|
 
-In the future, we aim at generating a bioschemas profile based on our model using the VS editor. The profile for synthetic datasets can be a subclass of “datasets”.
+In the future, we aim at generating a bioschemas profile based on our model using the Data Discovery Engine's Schema Playground [@ddeSchemaPlayground] editor. The profile for synthetic datasets can be a subclass of “datasets”.
 
 #### EDAM ontology
 As said before, during the BioHackathon we decided to map [EDAM ontology terms](https://bioportal.bioontology.org/ontologies/EDAM) to describe the property values of the synthetic datasets metadata to increase findability in data repositories. EDAM is a domain ontology of data analysis and data management in bio- and other sciences, and science-based applications. It is the ontology of reference to annotate provenance metadata of processed data in the Life Sciences [@edam_poster]. The mapping of the metadata model to EDAM was finished during a follow-up virtual mini-hackathon held few weeks later the BioHackathon. Importantly, we detected potential new terms for the synthetic data subdomain to be added to EDAM. Finally, we agreed to map to EDAM terms the model descriptors *per se* in the future.
@@ -242,7 +255,7 @@ Our overarching goal of developing an infrastructure prototype for the generatio
 
 Our infrastructure prototype is composed of a set of generation workflows using different tools and methods, and a user interface (Web UI + docker container) to run a generation workflow and assess the quality of the generated synthetic dataset. The Web application contains 3 components: 1. _Input data_ where the user can upload the real data to synthesize; 2. _Generation model_ where the user can select the generative algorithm model and set up the parameters; 3. _Output data_ where the user can upload the generated synthetic data for quality assessment with some metrics and visualisations. This Web application prototype is a proof-of-concept of the simple synthetic health data generation infrastructure envisioned and implemented in collaboration between the health data community and the ML community. The fact to have the workflows separated from the Web UI, makes our design modular and easily extendable. With regards to quality assessment, we just explored some metrics and tools, but during the hackathon we already detected some recent existing benchmarking evaluations and visualisations preprints (https://arxiv.org/pdf/2209.15421v1.pdf). The quality, performance and privacy assessment will be followed up jointly with the OpenEBench effort for community consensus. In the future we plan to implement this infrastructure for the Health community. An important point, would be to add a guidance section for the end-user to aid the decision on what generative model and parameters to use for its downstream application. Another point is to add a data submission form or link to BioStudies to facilitate the FAIRness description and registration of the new synthetic data.
 
-We proposed a minimal FAIR synthetic health data implementation composed of a metadata model and a repository for their deposition. We published version 1 of the metadata model which is publicly available for open discussion and review on GitHub for the community. To enhance synthetic health data findability we mapped the model to both bioschemas and the EDAM ontology, which is the ontology used to tag resources in [bio.tools](https://bio.tools/). In the future, we plan to collaborate with RO-Crate to provide data+tool as FAIR research objects, describe best practices using RDMKit, and set up FAIR recipes for synthetic data generation in FAIRCookbook.
+We proposed a minimal FAIR synthetic health data implementation composed of a metadata model and a repository for their deposition. We published the version 1 of the metadata model, available for open discussion and review on GitHub for the community. To enhance synthetic health data findability we mapped the model to both bioschemas and the EDAM ontology, which is the ontology used to tag resources in [bio.tools](https://bio.tools/). In the future, we plan to collaborate with RO-Crate to provide data+tool as FAIR research objects, describe best practices using RDMKit, and set up FAIR recipes for synthetic data generation in FAIRCookbook.
 
 The BioHackathon-Europe venue set a perfect environment for engagement: our project had 20 participants (4 remote) where 6 were new to the BioHackathon, and from 7 countries (NL, ES, LU, UK, GR, FL, and DE). It gave us the opportunity to collaborate with 4 other projects (nr. 4, 5, 17 and 18), but we suffered some challenges as well such as to keep an steady progress pace between in person and remote attendees. Overall, another great experience with a satisfactory project outcome with follow-up development.
 
@@ -259,11 +272,11 @@ The BioHackathon-Europe venue set a perfect environment for engagement: our proj
 As long-term outcomes, we are planning to submit a manuscript on the synthetic health data infrastructure developed following ELIXIR requirements. The development of the infrastructure _per se_ is a long-term outcome, where we envision adding other components such as implementing evaluation metrics to assess the quality of the generated synthetic data and a direct deposition of the synthetic datasets to recommended repositories.
 
 ## Contributions
-
+All authors actively participated during the hackathon to produce the outcomes we detail in this paper, they provided content and all reviewed the paper. Specifically, NQR contributed to providing workflows, the metadata model, wrote about these in dedicated sections and drafted the final paper. BA and SAC contributed to providing workflows and wrote about this in the paper. MS contributed to the evaluation metrics of the synthetic data and wrote about this in the paper. MCB, SAC, DW, LJC, GT and RS contributed to the metadata model and wrote about this in the paper. MK and MP contributed to the metadata model mapping to EDAM.  
 
 ## Acknowledgements
 
-We thank the organisers of the BioHackathon-Europe 2022 for travel support for some of the authors.
+We thank the organisers of the BioHackathon-Europe 2022 for travel support for some of the authors. Special thanks to Fotis Psomopoulos, Venkata Pardhasaradhi Satagopam, Soumyabrata Ghosh, Davide Cirillo, Salvador Capella Gutierrez for having the original project idea and contributing during the hackathon. Also, Nick Juty and Francis Chemorion for your very valuable contributions. Finally, to all participants of the BioHackathon-Europe 2022 that made possible this project engaging with fruitful discussions or giving us support.
 
 
 ## References

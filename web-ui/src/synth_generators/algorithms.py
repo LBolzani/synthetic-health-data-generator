@@ -3,8 +3,10 @@ from sdv.tabular import CopulaGAN
 from sdv.tabular import GaussianCopula
 from sdv.tabular import TVAE
 
+
+
 algos = {'CTGAN': CTGAN(),
-         'CopulaGAN': CopulaGAN() ,
+         'CopulaGAN': CopulaGAN(),
          'GaussianCopula': GaussianCopula(),
          'TVAE': TVAE()}
 

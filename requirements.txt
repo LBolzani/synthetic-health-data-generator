@@ -5,4 +5,4 @@ sklearn
 pandas
 seaborn
 matplotlib
-sdv
+sdv==0.17.1
