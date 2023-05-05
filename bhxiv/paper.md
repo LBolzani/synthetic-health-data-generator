@@ -13,6 +13,12 @@ authors:
   - name: Muhammad Shoaib
     orcid: 0000-0002-4854-4635
     affiliation: 2
+  - name: Luca Bolzani
+    orcid: 0000-0001-9893-0561
+    affiliation: 2
+  - name: Basel Alshaikhdeeb
+    orcid: 0000-0002-7518-2676
+    affiliation: 2
   - name: Marcos Casado Barbero
     orcid: 0000-0002-7747-6256
     affiliation: 4
@@ -23,10 +29,13 @@ authors:
     orcid: 0000-0003-3986-0510
     affiliation: 5  
   - name: Ginger Tsueng
-    affiliation: 6
-  - name: Basel Alshaikhdeeb
-    orcid: 0000-0002-7518-2676
-    affiliation: 7    
+    affiliation: 6   
+  - name: Soumyabrata Gosh
+    orcid: 0000-0002-9646-1439
+    affiliation: 2  
+  - name: Venkata Pardhasaradhi Satagopam Venkata
+    orcid: 0000-0002-6532-5880
+    affiliation: 2  
 affiliations:
   - name: Human Genetics, Leiden University Medical Center, Leiden, Netherlands
     index: 1
@@ -40,8 +49,7 @@ affiliations:
     index: 5
   - name: Scripps Research Institute, La Jolla, CA 92037, US
     index: 6
-  - name: Luxembourg Center for Systems Biomedicine, University of Luxembourg, Luxembourg
-    index: 7    
+ 
 date: 11 November 2022
 cito-bibliography: paper.bib
 event: BioHackEU22
