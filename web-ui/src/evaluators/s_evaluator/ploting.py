@@ -55,7 +55,7 @@ def create_plots(comps_or, comps_sy, labels_or, labels_sy, output=None):
                         hue=labels_sy,
                         palette="Set2",
                         s=50)
-        ax.set_title("Synthatic Data", fontsize=20)
+        ax.set_title("synthetic Data", fontsize=20)
         ax.set(xticks=[], yticks=[])
 
         if output is not None:
@@ -77,7 +77,7 @@ def create_plots(comps_or, comps_sy, labels_or, labels_sy, output=None):
                             palette="Set1",
                             s=50)
 
-            ax.set_title("Synthatic Data", fontsize=20)
+            ax.set_title("synthetic Data", fontsize=20)
             ax.set(xticks=[], yticks=[])
 
     plt.subplots_adjust(wspace=0.10)
@@ -90,6 +90,6 @@ def plot_dfs_2d(comps_or, comps_sy):
 
     fig = go.Figure(layout=layout)
     fig.add_scatter(x=comps_or[:, 0], y=comps_or[:, 1], mode="markers", name="Real")
-    fig.add_scatter(x=comps_sy[:, 0], y=comps_sy[:, 1], mode="markers", name="Synthatic")
+    fig.add_scatter(x=comps_sy[:, 0], y=comps_sy[:, 1], mode="markers", name="synthetic")
 
     return fig
