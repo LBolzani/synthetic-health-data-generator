@@ -38,13 +38,16 @@ authors:
     orcid: 0000-0003-3986-0510
     affiliation: 5  
   - name: Ginger Tsueng
-    affiliation: 6   
+    affiliation: 6
   - name: Soumyabrata Ghosh
     orcid: 0000-0002-9646-1439
-    affiliation: 2  
+    affiliation: 2
   - name: Venkata Pardhasaradhi Satagopam
     orcid: 0000-0002-6532-5880
-    affiliation: 2  
+    affiliation: 2
+  - name: Rahuman S. Malik Sheriff
+    orcid: 0000-0003-0705-9809
+    affiliation: 4
 affiliations:
   - name: Human Genetics, Leiden University Medical Center, Leiden, Netherlands
     index: 1
@@ -248,7 +251,8 @@ As mentioned before, during the BioHackathon we mapped [EDAM ontology terms](htt
 
 
 ### 2. Repository for deposition
-Our goal was to propose to the community a repository for the deposition of the synthetic (health) datasets. Our approach was to review existing data repositories with a ML learning focus. We wanted to check first their suitability according to our criteria to avoid the development of a new repository. Our criteria was: 1. to use a widely used and mature data repository; 2. to deposit ML datasets or ML modelling; 3. to enable deposition of data by authors/users. [BioStudies](https://www.ebi.ac.uk/biostudies/) is a database that holds descriptions of biological studies and links to data from these studies in other databases. It can accept a wide range of types of studies described via a simple format and also enables manuscript authors to submit supplementary information, linking to it from the publication. Furthermore, (1) it is a recommended ELIXIR deposition database, it contains almost 10.000.000 files (but not much content on synthetic data from the queries "synthetic" or "synthetic data"), (2) has a flexible submission metadata model (description [here](https://www.ebi.ac.uk/biostudies/misc/SubmissionFormatV5a.pdf)) that already aligns with bioschemas, and (3) is aligned to the [omicsDI database](https://www.omicsdi.org/). We agreed in the suitability of this data repository to extend their scope to synthetic data. After the BioHackathon, and once we had the final first version of the metadata model, we made a version of it for BioStudies, following their submission metadata template. This can be found on [GitHub](https://github.com/LBolzani/synthetic-health-data-generator/tree/main/biostudies-registry). Then, we contacted BioStudies and sent them the synthetic metadata template proposal to request to use the repository for synthetic data deposition. BioStudies' managers, after evaluating our request, agreed to set up a "synthetic data collection" with useful search facets (e.g., https://www.ebi.ac.uk/biostudies/EU-ToxRisk/studies). This is ongoing, but BioStudies will be ready soon to be used as the repository of reference for the deposition of synthetic data.
+
+Our goal was to propose to the community a repository for the deposition of the synthetic (health) datasets. Our approach was to review existing data repositories with a ML learning focus. We wanted to check first their suitability according to our criteria to avoid the development of a new repository. Our criteria was: 1. to use a widely used and mature data repository; 2. for ML datasets or ML modelling; 3. enables to deposit data by authors/users. [BioStudies](https://www.ebi.ac.uk/biostudies/) is a database that holds descriptions of biological studies, links to data from these studies in other databases, it can accept a wide range of types of studies described via a simple format, and it also enables manuscript authors to submit supplementary information and link to it from the publication. Furthermore, it is a recommended ELIXIR deposition database, it contains almost 10.000.000 files (but not much content on synthetic data from the queries "synthetic" or "synthetic data"), has a flexible submission metadata model (description [here](https://www.ebi.ac.uk/biostudies/misc/SubmissionFormatV5a.pdf)) that already aligns with bioschemas. Datasets submitted to BioStudies are indexed and searchable via [omicsDI](https://www.omicsdi.org/) and [EBI Search](https://www.ebi.ac.uk/ebisearch). We agreed in the suitability of this data repository to extend their scope to synthetic data. After the BioHackathon and once we had the final first version of the metadata model agreed, we first made a version for BioStudies following their submission metadata template, which can be found on [GitHub](https://github.com/LBolzani/synthetic-health-data-generator/tree/main/biostudies-registry). Then, we contacted them and sended the synthetic metadata template proposal to them to request to use the repository for synthetic data deposition. BioStudies managers after evaluating our request, they agreed to set up a "synthetic data collection" with useful search facets as in e.g., (https://www.ebi.ac.uk/biostudies/EU-ToxRisk/studies). This is ongoing, but BioStudies will be ready soon to be used as the repository of reference for the deposition of synthetic data.
 
 
 # Discussion
