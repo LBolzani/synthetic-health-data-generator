@@ -19,12 +19,6 @@ authors:
   - name: Muhammad Shoaib
     orcid: 0000-0002-4854-4635
     affiliation: 2
-  - name: Luca Bolzani
-    orcid: 0000-0001-9893-0561
-    affiliation: 2
-  - name: Basel Alshaikhdeeb
-    orcid: 0000-0002-7518-2676
-    affiliation: 2
   - name: Marcos Casado Barbero
     orcid: 0000-0002-7747-6256
     affiliation: 4
@@ -38,7 +32,10 @@ authors:
     orcid: 0000-0003-3986-0510
     affiliation: 5  
   - name: Ginger Tsueng
-    affiliation: 6
+    affiliation: 6   
+  - name: Danielle Welter
+    orcid: 0000-0003-1058-2668
+    affiliation: 2
   - name: Soumyabrata Ghosh
     orcid: 0000-0002-9646-1439
     affiliation: 2
@@ -222,9 +219,11 @@ For executability and portability, we deployed the application in a [docker](htt
 ## FAIR Synthetic Datasets
 In parallel with providing infrastructure for the generation of synthetic health data, experts on health data FAIRness and modelling discussed a FAIR implementation of the generated synthetic data. Next, we present our proposal on how to make the synthetic health datasets comply with these principles, with the main focus being data reusability. Firstly, we defined a minimal machine-readable metadata model for synthetic health data. Secondly, we identified an existing data repository where to deposit the synthetic data once generated. We decided to use the BioStudies repository from EMBL-EBI (https://www.ebi.ac.uk/biostudies/) to store and implement our proposed model. In the following sections we describe this proposal and the used criteria on how it was created and submitted to BioStudies.
 
-The aim was to provide synthetic datasets that were reusable for the community and readable by machines, i.e., FAIR data. To this extent, we designed a metadata model to use as guidance for the end-users of our framework. This metadata model is publicly available on our [GitHub repository](https://github.com/NuriaQueralt/synthetic-health-data-generator/blob/main/metadata-model/synthetic_health_data__metadata_model_v1_january_2023.tsv). It is meant primarily to improve findability of synthetic health datasets in public repositories. It is composed of 24 descriptors that, together, provide context for 4 different semantic groups: the dataset, generation tool, attribution and provenance. Not all of these descriptors are indispensable for a functional metadata model, and thus we ranked them following the MoSCoW criteria: 11 Must-, 8 Should- and 7 Could-haves. For the sake of consistency in the metadata of these fields, we provided the recommended ontology mappings (preferably OBO ontologies - e.g. PATO) to use when populating the metadata model. With the help of EDAM developers that also attended the BioHackathon-Europe, we were able to align multiple model fields of our model with EDAM's ripe ontologized terms.
+### 1. Metadata model
+Having in mind the provision of synthetic datasets that were reusable for the community and readable by machines, i.e., FAIR data, we designed a metadata model to use as guidance for end-users of our framework. This metadata model is publicly available on [GitHub](https://github.com/NuriaQueralt/synthetic-health-data-generator/blob/34e76cd1c3c7f79aebb98ac89ef82b240fae46b0/metadata-model/synthetic_health_data__metadata_model_v1_january_2023.tsv). It is meant primarily to improve findability of synthetic health datasets in public repositories. It is composed of 24 descriptors that, together, provide context for 4 different semantic groups: the dataset, generation tool, attribution and provenance. Not all of these descriptors are required for a functional metadata model, and thus we ranked them following the MoSCoW criteria: 11 Must-, 8 Should- and 7 Could-haves. For the sake of consistency in the metadata of these fields, we provided the recommended bio-ontology mappings (preferably OBO ontologies) to use when populating the metadata model. As several EDAM developers also attend the BioHackathon-Europe, we were able to align with and map most terms to the EDAM ontology.
 
-This 24 descriptor set was defined after reviewing several existing repositories for ML datasets, such as [Kaggle](https://www.kaggle.com/) or [huggingface](https://huggingface.co/), and identified a minimal number and linked to a MoSCoW rank according to our experience from other projects, such as the curation effort within the ELIXIR ML/synthetic data group. Equity and fairness are essential for the development of health tools for the purpose of research and decision making, especially in the context of human clinical data. To enable this, we propose to record the _biological sex_ property. The model is available as TSV and JSON distributions on our [project GitHub repository](https://github.com/LBolzani/synthetic-health-data-generator/tree/main/metadata-model).
+The 24 descriptors were defined after reviewing several existing repositories for ML datasets such as [Kaggle](https://www.kaggle.com/) or [huggingface](https://huggingface.co/), and identified a minimal number and linked to a MoSCoW rank according to our experience from other projects such as the curation effort within the ELIXIR ML/synthetic data group. Equity and fairness are very important concerns when developing health tools for research and decision making for the clinical setting. To enable this we propose to record the _biological sex_ property. The model is available as TSV and JSON distributions on our [project GitHub repository](https://github.com/LBolzani/synthetic-health-data-generator/tree/main/metadata-model).
+
 
 #### Bioschemas
 [Bioschemas](https://bioschemas.org/) [@bioschemas_poster] is a community effort to facilitate the structured mark up of web pages in Life Sciences. Bioschemas profiles are community-standardized recommendations on the application of Schema.org types, defining a subset of properties and constraints relevant to the life sciences. To further improve FAIRness of the synthetic datasets, we mapped properties in our metadata model to the Bioschemas Dataset profile and included examples of how each property could be used to capture the metadata in JSON Schema, following the Bioschemas Dataset profile.
@@ -247,7 +246,7 @@ Regarding the description of data points and other characteristics of the datase
 In the future, we aim at generating a bioschemas profile based on our model using the Data Discovery Engine's Schema Playground [@ddeSchemaPlayground] editor. The profile for synthetic datasets can be a subclass of "datasets".
 
 #### EDAM ontology
-As mentioned before, during the BioHackathon we mapped [EDAM ontology terms](https://bioportal.bioontology.org/ontologies/EDAM) to describe the property values of the synthetic datasets metadata. EDAM is a domain ontology for data analysis, data management, and science-based applications in the life sciences and other domains. As of now, it is the reference ontology to annotate provenance metadata of processed data in the Life Sciences [@edam_poster]. Mapping the metadata model to EDAM was finished during a follow-up virtual mini-hackathon held a few weeks later the BioHackathon. Importantly, we detected potential new terms for the synthetic data subdomain to be added to EDAM. Finally, we agreed to map to EDAM terms the model descriptors *per se* in the future.
+As mentioned above, during the BioHackathon we decided to use [EDAM ontology terms](https://bioportal.bioontology.org/ontologies/EDAM) to describe the property values of the synthetic datasets metadata to increase findability in data repositories. EDAM is a domain ontology of data analysis and data management in bio- and other sciences, and science-based applications. It is the ontology of reference to annotate provenance metadata of processed data in the Life Sciences [@edam_poster]. The mapping of the metadata model to EDAM was finished during a follow-up virtual mini-hackathon held few weeks later the BioHackathon. Importantly, we detected potential new terms for the synthetic data subdomain to be added to EDAM. Finally, we agreed to map to EDAM terms the model descriptors *per se* in the future.
 
 
 ### 2. Repository for deposition
