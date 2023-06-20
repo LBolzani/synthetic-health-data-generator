@@ -1,6 +1,6 @@
 ---
-title: 'Infrastructure for Synthetic Health Data'
-title_short: 'Synthetic Health Data'
+title: 'Infrastructure for synthetic health data'
+title_short: 'Synthetic health data'
 tags:
   - Health data
   - Synthetic data
@@ -10,6 +10,12 @@ authors:
   - name: Núria Queralt-Rosinach
     orcid: 0000-0003-0169-8159
     affiliation: 1
+  - name: Basel Alshaikhdeeb
+    orcid: 0000-0002-7518-2676
+    affiliation: 2 
+  - name: Luca Bolzani
+    orcid: 
+    affiliation: 2
   - name: Muhammad Shoaib
     orcid: 0000-0002-4854-4635
     affiliation: 2
@@ -18,18 +24,36 @@ authors:
     affiliation: 4
   - name: Sergi Aguiló-Castillo
     orcid: 0000-0003-0830-5733
-    affiliation: 3  
+    affiliation: 3 
+  - name: Davide Cirillo
+    orcid: 0000-0003-4982-4716
+    affiliation: 3 
   - name: Leyla Jael Castro
     orcid: 0000-0003-3986-0510
     affiliation: 5  
   - name: Ginger Tsueng
     affiliation: 6
-  - name: Basel Alshaikhdeeb
-    orcid: 0000-0002-7518-2676
-    affiliation: 7
   - name: Matúš Kalaš
     orcid: 0000-0002-1509-4981
+    affiliation: 7
+  - name: Magnus Palmblad
+    orcid: 0000-0002-5865-8994
     affiliation: 8
+  - name: Basel Alshaikhdeeb
+    orcid: 0000-0002-7518-2676
+    affiliation: 7    
+  - name: Danielle Welter
+    orcid: 0000-0003-1058-2668
+    affiliation: 2
+  - name: Soumyabrata Ghosh
+    orcid: 0000-0002-9646-1439
+    affiliation: 2
+  - name: Venkata Pardhasaradhi Satagopam
+    orcid: 0000-0002-6532-5880
+    affiliation: 2
+  - name: Rahuman S. Malik Sheriff
+    orcid: 0000-0003-0705-9809
+    affiliation: 4
 affiliations:
   - name: Human Genetics, Leiden University Medical Center, Leiden, Netherlands
     index: 1
@@ -43,11 +67,11 @@ affiliations:
     index: 5
   - name: Scripps Research Institute, La Jolla, CA 92037, US
     index: 6
-  - name: Luxembourg Center for Systems Biomedicine, University of Luxembourg, Luxembourg
-    index: 7
   - name: Department of Informatics, University of Bergen, Norway
+    index: 7  
+  - name: Center for Proteomics and Metabolomics, Leiden University Medical Center, Leiden, Netherlands
     index: 8
-date: 5 May 2023
+date: 20 June 2023
 cito-bibliography: paper.bib
 event: BH22EU
 biohackathon_name: "BioHackathon Europe 2022"
