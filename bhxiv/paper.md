@@ -179,9 +179,9 @@ run_synthea -m moduleFilename:anotherModule:module*
 run_synthea --exporter.baseDirectory "./output_tx/" Texas
 ```
 
-To generate different type of data with modules, you must use the `-m` option with the name of your modules. Check the page with an example [here](https://github.com/synthetichealth/synthea/wiki/The--M-Feature).
+To generate different types of data with modules, one must use the `-m` option with the name of your modules. Check the page with an example [here](https://github.com/synthetichealth/synthea/wiki/The--M-Feature).
 
-After producing the CSV files, you need to create the OMOP database on your own or continue following the guide from [OMOP to Phenopackets for COVID-19 analytics](https://github.com/elixir-europe/biohackathon-projects-2021/blob/main/projects/36/bhxiv/paper.md). The approach is not embedded in the main infrastructure as the different output options need to be discussed for the FrontEnd part.
+After producing the CSV files, one needs to create the OMOP database on their own, or continue following the guide from [OMOP to Phenopackets for COVID-19 analytics](https://github.com/elixir-europe/biohackathon-projects-2021/blob/main/projects/36/bhxiv/paper.md). The approach is not embedded in the main infrastructure as the different output options need to be discussed for the FrontEnd part.
 
 
 ### 2. Quality assessment
