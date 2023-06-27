@@ -4,8 +4,10 @@ title_short: 'Synthetic health data'
 tags:
   - Health data
   - Synthetic data
+  - Synthetic data generation
+  - Generative models
   - Workflows
-  - FAIR
+  - FAIR data
 authors:
   - name: Núria Queralt-Rosinach
     orcid: 0000-0003-0169-8159
@@ -39,9 +41,6 @@ authors:
   - name: Magnus Palmblad
     orcid: 0000-0002-5865-8994
     affiliation: 8
-  - name: Basel Alshaikhdeeb
-    orcid: 0000-0002-7518-2676
-    affiliation: 7    
   - name: Danielle Welter
     orcid: 0000-0003-1058-2668
     affiliation: 2
@@ -71,12 +70,12 @@ affiliations:
     index: 7  
   - name: Center for Proteomics and Metabolomics, Leiden University Medical Center, Leiden, Netherlands
     index: 8
-date: 20 June 2023
+date: 22 June 2023
 cito-bibliography: paper.bib
-event: BH22EU
+event: BioHackEU22
 biohackathon_name: "BioHackathon Europe 2022"
 biohackathon_url:   "https://biohackathon-europe.org/"
-biohackathon_location: "Paris, France, 2022"
+biohackathon_location: "Greater Paris, France, 2022"
 group: Project 15
 # URL to project git repo --- should contain paper.md
 git_url: https://github.com/NuriaQueralt/synthetic-health-data-generator/bhxiv
@@ -100,7 +99,7 @@ pasting above link (or yours) in
 # Introduction
 Machine learning (ML) methods are becoming ever more prevalent across all domains of life sciences. However, a key component of effective ML is the availability of large datasets that are diverse and representative. In the context of health systems, with significant heterogeneity of clinical phenotypes and diversity of healthcare systems, there exists a necessity to develop and refine unbiased and fair ML models. Synthetic data are increasingly being used to protect the patient’s right to privacy and overcome the paucity of annotated open-access medical data. Synthetic data and generative models can address these challenges while advancing the use of ML in healthcare and research.
 
-Following up the efforts currently undertaken in the ELIXIR Health Data and the Machine Learning Focus Groups around the synthetic health-data landscape, this project focuses on the health data providers' need for a ready-to-use synthetic data platform assessed by health data experts, researchers, and ML specialists. Aligned with ELIXIR Health Data Focus Group’s objectives, we aim at building an infrastructure for synthetic health data offering a Dockerised synthetic data generator based on the open-source libraries [Synthetic Data Vault (SDV)](https://github.com/sdv-dev) and [ydata-synthetic](https://github.com/ydataai) with state-of-the-art ML methods. This framework will enable users to generate synthetic data that has the same structure and statistical properties as the original dataset from a variety of sources (clinical, variational, or omics). Despite the capacity to generate their own datasets, a set of exemplary datasets will be publicly available in appropriate repositories and will include rich metadata descriptions according to the [DOME recommendations](https://dome-ml.org/) and [GA4GH](https://ga4gh.org) standards. [OpenEBench](https://openebench.bsc.es) will host a community of practice for comparing different approaches for synthetic data generation. Here, we present our proof of concept for the generation of synthetic health data and our proposed FAIR implementation of the generated synthetic datasets developed after one week of BioHacking by together 20 participants (10 new to the project), from different countries (NL, ES, LU, UK, GR, FL, DE, ...).
+Following up the efforts currently undertaken in the ELIXIR Health Data and the Machine Learning Focus Groups around the synthetic health-data landscape, this project focuses on the health data providers' need for a ready-to-use synthetic data platform assessed by health data experts, researchers, and ML specialists. Aligned with ELIXIR Health Data Focus Group’s objectives, we aim at building an infrastructure for synthetic health data offering a containerised synthetic data generator based on the open-source libraries [Synthetic Data Vault (SDV)](https://github.com/sdv-dev) and [ydata-synthetic](https://github.com/ydataai) with state-of-the-art ML methods. This framework will enable users to generate synthetic data that has the same structure and statistical properties as the original dataset from a variety of sources (clinical, variational, or omics). Despite the capacity to generate their own datasets, a set of exemplary datasets will be publicly available in appropriate repositories and will include rich metadata descriptions according to the [DOME recommendations](https://dome-ml.org/) and [GA4GH](https://ga4gh.org) standards. [OpenEBench](https://openebench.bsc.es) will host a community of practice for comparing different approaches for synthetic data generation. Here, we present our proof of concept for the generation of synthetic health data and our proposed FAIR implementation of the generated synthetic datasets developed after one week of BioHacking by together 20 participants (10 new to the project), from different countries (NL, ES, LU, UK, GR, FL, DE, ...).
 
 <!--
 # Results
