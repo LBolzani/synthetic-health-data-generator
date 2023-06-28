@@ -70,7 +70,7 @@ affiliations:
     index: 7  
   - name: Center for Proteomics and Metabolomics, Leiden University Medical Center, Leiden, Netherlands
     index: 8
-date: 22 June 2023
+date: 28 June 2023
 cito-bibliography: paper.bib
 event: BioHackEU22
 biohackathon_name: "BioHackathon Europe 2022"
@@ -78,7 +78,7 @@ biohackathon_url:   "https://biohackathon-europe.org/"
 biohackathon_location: "Greater Paris, France, 2022"
 group: Project 15
 # URL to project git repo --- should contain paper.md
-git_url: https://github.com/NuriaQueralt/synthetic-health-data-generator/bhxiv
+git_url: https://github.com/LBolzani/synthetic-health-data-generator
 # This is the short authors description that is used at the
 # bottom of the generated paper.
 authors_short: Núria Queralt-Rosinach \emph{et al.}
