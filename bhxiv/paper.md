@@ -14,9 +14,9 @@ authors:
     affiliation: 1
   - name: Basel Alshaikhdeeb
     orcid: 0000-0002-7518-2676
-    affiliation: 2 
+    affiliation: 2
   - name: Luca Bolzani
-    orcid: 
+    orcid:
     affiliation: 2
   - name: Muhammad Shoaib
     orcid: 0000-0002-4854-4635
@@ -26,10 +26,10 @@ authors:
     affiliation: 4
   - name: Sergi Aguiló-Castillo
     orcid: 0000-0003-0830-5733
-    affiliation: 3 
+    affiliation: 3
   - name: Davide Cirillo
     orcid: 0000-0003-4982-4716
-    affiliation: 3 
+    affiliation: 3
   - name: Leyla Jael Castro
     orcid: 0000-0003-3986-0510
     affiliation: 5  
@@ -284,12 +284,12 @@ The BioHackathon Europe venue set a perfect environment for engagement: our proj
 As long-term outcomes, we are planning to submit a manuscript on the synthetic health data infrastructure developed following ELIXIR requirements. The development of the infrastructure _per se_ is a long-term outcome, where we envision adding other components such as implementing evaluation metrics to assess the quality of the generated synthetic data and a direct deposition of the synthetic datasets to recommended repositories.
 
 ## Contributions
-All authors actively participated during and after the hackathon to produce the outcomes we detail in this paper; they provided content and all reviewed or revised the paper. Specifically, NQR contributed to providing workflows, the metadata model, wrote about these in dedicated sections and drafted the final paper. BA and SAC contributed to providing workflows and wrote about this in the paper. MS contributed to the evaluation metrics of the synthetic data and wrote about this in the paper. MCB, SAC, DW, LJC, GT and RS contributed to the metadata model and wrote about this in the paper. MK, NQR, MP, and DC contributed to the metadata model mapping to EDAM, and extended EDAM Bioimaging with generative ML concepts. 
+All authors actively participated during and after the hackathon to produce the outcomes we detail in this paper; they provided content and all reviewed or revised the paper. Specifically, NQR contributed to providing workflows, the metadata model, wrote about these in dedicated sections and drafted the final paper. BA, DC and SAC contributed to providing workflows and wrote about this in the paper. LB contributed on coding the Web UI and packaged it in a Docker container, and managed the project GitHub repository and its documentation. MS contributed to the evaluation metrics of the synthetic data and wrote about this in the paper. MCB, SAC, DW, LJC, GT and RS contributed to the metadata model and wrote about this in the paper. MK, NQR, MP, and DC contributed to the metadata model mapping to EDAM, and extended EDAM Bioimaging with generative ML concepts.
 
 ## Acknowledgements
 
 We thank the organisers of the BioHackathon Europe 2022 for travel support for some of the authors. This work was funded/supported by ELIXIR, the research infrastructure for life-science data.
-Special thanks to Fotis Psomopoulos, Venkata Pardhasaradhi Satagopam, Soumyabrata Ghosh, Davide Cirillo, Salvador Capella Gutierrez for having the original project idea and contributing during the hackathon. Also, Nick Juty and Francis Chemorion for your very valuable contributions. Finally, to all participants of the BioHackathon Europe 2022 that made possible this project engaging with fruitful discussions or giving us support.
+Special thanks to Fotis Psomopoulos, Salvador Capella Gutierrez for having the original project idea and contributing during the hackathon. Also, Nick Juty and Francis Chemorion for your very valuable contributions. Finally, to all participants of the BioHackathon Europe 2022 that made possible this project engaging with fruitful discussions or giving us support.
 
 
 ## References
